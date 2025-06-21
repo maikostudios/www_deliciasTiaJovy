@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-4 group">
+  <div class="card p-4 group" :data-product-id="product.id">
     <!-- Product Image -->
     <div class="relative mb-4 overflow-hidden rounded-lg bg-gray-100">
       <div class="aspect-square w-full">
@@ -138,15 +138,26 @@ const handleImageError = (event) => {
 
 const handleAddToCart = async () => {
   isAdding.value = true
-  
+
   // Add a small delay for better UX
   await new Promise(resolve => setTimeout(resolve, 300))
-  
-  cartStore.addItem(props.product)
+
+  // 🎯 Agregar producto con opciones mejoradas de UX
+  cartStore.addItem(props.product, {
+    silent: false, // Mostrar notificación
+    autoOpenCart: false // No abrir carrito automáticamente
+  })
+
   isAdding.value = false
-  
-  // Optional: Show a brief success animation or toast
-  // You could emit an event here for parent components to handle
+
+  // 🎨 Animación del botón de éxito
+  const button = document.querySelector(`[data-product-id="${props.product.id}"] button`)
+  if (button) {
+    button.classList.add('bg-green-500', 'scale-105')
+    setTimeout(() => {
+      button.classList.remove('bg-green-500', 'scale-105')
+    }, 1000)
+  }
 }
 </script>
 

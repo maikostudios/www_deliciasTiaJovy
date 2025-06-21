@@ -27,19 +27,31 @@
     </section>
 
     <!-- Floating Cart Button (Mobile) -->
-    <div class="fixed bottom-6 right-6 z-40 md:hidden">
+    <div class="fixed bottom-8 right-4 z-40 md:hidden">
       <button
         @click="cartStore.toggleDrawer()"
-        class="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center relative"
+        class="w-16 h-16 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center relative group"
+        :class="{ 'animate-bounce': cartStore.itemCount > 0 && !cartStore.isDrawerOpen }"
       >
-        <ShoppingCartIcon class="h-6 w-6" />
+        <ShoppingCartIcon class="h-7 w-7 group-hover:scale-110 transition-transform" />
         <span
           v-if="cartStore.itemCount > 0"
-          class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-semibold"
+          class="absolute -top-2 -right-2 bg-red-500 text-white text-sm rounded-full h-7 w-7 flex items-center justify-center font-bold animate-pulse"
         >
           {{ cartStore.itemCount }}
         </span>
+
+        <!-- Ripple effect on tap -->
+        <div class="absolute inset-0 rounded-full bg-white opacity-0 group-active:opacity-20 transition-opacity"></div>
       </button>
+
+      <!-- Cart total preview (when items > 0) -->
+      <div
+        v-if="cartStore.itemCount > 0 && !cartStore.isDrawerOpen"
+        class="absolute bottom-full right-0 mb-2 bg-gray-900 text-white text-xs px-3 py-1 rounded-lg whitespace-nowrap opacity-90"
+      >
+        {{ cartStore.formattedTotal }}
+      </div>
     </div>
 
     <!-- Info Banner -->

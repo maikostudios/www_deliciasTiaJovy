@@ -28,7 +28,7 @@ export const useCartStore = defineStore('cart', () => {
   })
 
   // Actions
-  function addItem(product) {
+  function addItem(product, options = {}) {
     // Para productos configurables (tortas), cada configuración es única
     // por lo que no debemos buscar items existentes, siempre agregar nuevo
     if (product.configuration) {
@@ -57,6 +57,27 @@ export const useCartStore = defineStore('cart', () => {
           quantity: 1
         })
       }
+    }
+
+    // 🎯 Mostrar notificación de éxito si no está deshabilitada
+    if (!options.silent) {
+      // Usar notificaciones store si está disponible
+      try {
+        // Importación dinámica para evitar dependencias circulares
+        import('@/stores/notifications').then(({ useNotificationsStore }) => {
+          const notificationsStore = useNotificationsStore()
+          notificationsStore.productAdded(product.name)
+        })
+      } catch (error) {
+        console.log('📱 Producto agregado:', product.name)
+      }
+    }
+
+    // 🎯 Auto-abrir carrito en móvil si está configurado
+    if (options.autoOpenCart && window.innerWidth <= 768) {
+      setTimeout(() => {
+        openDrawer()
+      }, 500) // Delay para que se vea la notificación primero
     }
   }
 

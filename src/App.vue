@@ -17,8 +17,8 @@
     <!-- Footer -->
     <Footer />
 
-    <!-- Toast Notifications -->
-    <Toast ref="toastRef" />
+    <!-- Global Notifications -->
+    <NotificationContainer />
   </div>
 </template>
 
@@ -28,7 +28,7 @@ import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
 import CartDrawer from './components/cart/CartDrawer.vue'
 import OrderModal from './components/order/OrderModal.vue'
-import Toast from './components/ui/Toast.vue'
+import NotificationContainer from './components/ui/NotificationContainer.vue'
 </script>
 
 <style scoped>
