@@ -19,7 +19,7 @@
                 Ver Productos 🧁
               </RouterLink>
               <button
-                @click="scrollToBrandSection"
+                @click="openDirectLink"
                 class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg"
               >
                 📍 Visítanos en Nueva Imperial
