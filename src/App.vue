@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="min-h-screen bg-custom-pattern">
+  <div id="app" class="min-h-screen bg-custom-pattern overflow-x-hidden">
     <!-- Navbar -->
     <Navbar />
     
@@ -36,24 +36,26 @@ import NotificationContainer from './components/ui/NotificationContainer.vue'
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* Fondo personalizado con la imagen SVG */
+/* Fondo personalizado con la imagen SVG - Optimizado para móvil */
 .bg-custom-pattern {
   background-image: url('/images/fondo-web.svg');
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll; /* Cambiado de fixed a scroll para móvil */
   /* Fallback color en caso de que la imagen no cargue */
   background-color: #f9fafb;
   /* Asegurar que el fondo sea visible */
   position: relative;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
 }
 
-/* Overlay sutil para mejorar legibilidad */
+/* Overlay sutil para mejorar legibilidad - Optimizado para móvil */
 .bg-custom-pattern::before {
   content: '';
-  position: fixed;
+  position: absolute; /* Cambiado de fixed a absolute para móvil */
   top: 0;
   left: 0;
   right: 0;
@@ -61,6 +63,7 @@ import NotificationContainer from './components/ui/NotificationContainer.vue'
   background: rgba(255, 255, 255, 0.6);
   pointer-events: none;
   z-index: 0;
+  width: 100%;
 }
 
 /* Asegurar que el contenido esté por encima del overlay */
@@ -82,13 +85,26 @@ import NotificationContainer from './components/ui/NotificationContainer.vue'
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-/* Forzar que el fondo sea visible en el body */
-body {
-  background-image: url('/images/fondo-web.svg') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
-  background-color: #f9fafb !important;
+/* Reglas responsivas para el fondo */
+@media (max-width: 48rem) {
+  .bg-custom-pattern {
+    background-attachment: scroll !important;
+    background-position: center top !important;
+  }
+
+  .bg-custom-pattern::before {
+    position: absolute !important;
+  }
+}
+
+@media (min-width: 48.1rem) {
+  .bg-custom-pattern {
+    background-attachment: fixed;
+    background-position: center center;
+  }
+
+  .bg-custom-pattern::before {
+    position: fixed;
+  }
 }
 </style>

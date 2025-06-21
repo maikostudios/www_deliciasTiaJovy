@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen overflow-x-hidden">
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-primary via-secondary to-accent text-white overflow-hidden">
+    <section class="relative bg-gradient-to-br from-primary via-secondary to-accent text-white overflow-hidden w-full">
       <div class="absolute inset-0 bg-black/20"></div>
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -284,7 +284,8 @@
                   allowfullscreen=""
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
-                  class="w-full"
+                  class="w-full max-w-full"
+                  style="max-width: 100%; overflow: hidden;"
                 ></iframe>
 
                 <!-- Map Overlay for Mobile -->

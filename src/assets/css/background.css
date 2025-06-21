@@ -1,20 +1,24 @@
 /* Fondo personalizado global para Delicias Tía Jovy */
 
-/* Aplicar el fondo SVG al html y body */
+/* Aplicar el fondo SVG al html y body - Optimizado para móvil */
 html, body {
   background-image: url('/images/fondo-web.svg');
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll; /* Cambiado de fixed a scroll para móvil */
   background-color: #f9fafb;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
 }
 
 /* Asegurar que el fondo se mantenga en el contenedor principal */
 #app {
   background: transparent;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Prevenir scroll horizontal en el contenedor principal */
 }
 
 /* Overlay para mejorar legibilidad del contenido */
@@ -41,12 +45,41 @@ section {
   position: relative;
 }
 
+/* Reglas específicas para móvil */
+@media (max-width: 48rem) {
+  html, body {
+    background-attachment: scroll !important; /* Forzar scroll en móvil */
+    background-size: cover !important;
+    background-position: center top !important; /* Centrar arriba en móvil */
+  }
+
+  #app {
+    position: relative;
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* Prevenir cualquier elemento que cause scroll horizontal */
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Reglas para tablet y desktop */
+@media (min-width: 48.1rem) {
+  html, body {
+    background-attachment: fixed; /* Fixed solo en desktop */
+    background-position: center center;
+  }
+}
+
 /* Debugging: hacer el fondo más visible temporalmente */
 .debug-background {
   background-image: url('/images/fondo-web.svg') !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
+  background-attachment: scroll !important;
   opacity: 1 !important;
 }
