@@ -36,5 +36,5 @@ firebase-debug.*.log
 .env.test.local
 .env.production.local
 
-# Images (placeholder until real images are added)
-public/images/
+# Images are now included in the repository
+# public/images/ - REMOVED to include images in repo
