@@ -288,17 +288,38 @@ const productImageUrl = computed(() => {
 
 const availableSizes = computed(() => {
   const allSizes = productsStore.cakeConfig.sizes
-  return allSizes.filter(size => props.product.cakeConfig.sizes.includes(size.people))
+  const productSizes = props.product.cakeConfig?.sizes || props.product.cakeConfig?.availableSizes || []
+
+  // Si el producto no tiene configuración específica, usar todos los tamaños disponibles
+  if (productSizes.length === 0) {
+    return allSizes
+  }
+
+  return allSizes.filter(size => productSizes.includes(size.people))
 })
 
 const availableFillings = computed(() => {
   const allFillings = productsStore.cakeConfig.fillings
-  return allFillings.filter(filling => props.product.cakeConfig.fillings.includes(filling.id))
+  const productFillings = props.product.cakeConfig?.fillings || props.product.cakeConfig?.availableFillings || []
+
+  // Si el producto no tiene configuración específica, usar todos los rellenos disponibles
+  if (productFillings.length === 0) {
+    return allFillings
+  }
+
+  return allFillings.filter(filling => productFillings.includes(filling.id))
 })
 
 const availableExtras = computed(() => {
   const allExtras = productsStore.cakeConfig.extras
-  return allExtras.filter(extra => props.product.cakeConfig.extras.includes(extra.id))
+  const productExtras = props.product.cakeConfig?.extras || props.product.cakeConfig?.availableExtras || []
+
+  // Si el producto no tiene configuración específica, usar todos los extras disponibles
+  if (productExtras.length === 0) {
+    return allExtras
+  }
+
+  return allExtras.filter(extra => productExtras.includes(extra.id))
 })
 
 const minPrice = computed(() => {
