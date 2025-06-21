@@ -66,11 +66,11 @@ export const useProductsStore = defineStore('products', () => {
 
   // Getters
   const featuredProducts = computed(() => {
-    return products.value.filter(product => product.featured && product.active)
+    return products.value.filter(product => product.featured && product.active !== false)
   })
 
   const filteredProducts = computed(() => {
-    let filtered = products.value.filter(product => product.active)
+    let filtered = products.value.filter(product => product.active !== false)
 
     // Filter by category
     if (selectedCategory.value !== 'all') {

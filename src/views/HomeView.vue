@@ -386,7 +386,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useProductsStore } from '@/stores/products'
 import ProductCard from '@/components/products/ProductCard.vue'
@@ -394,6 +394,15 @@ import ProductCard from '@/components/products/ProductCard.vue'
 const productsStore = useProductsStore()
 
 const featuredProducts = computed(() => productsStore.featuredProducts)
+
+// Load products when component mounts
+onMounted(async () => {
+  try {
+    await productsStore.fetchProducts()
+  } catch (error) {
+    console.error('Error loading products in HomeView:', error)
+  }
+})
 
 const handleImageError = (event) => {
   // Fallback to emoji display if image fails to load

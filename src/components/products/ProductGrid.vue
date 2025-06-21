@@ -63,7 +63,7 @@
     <div v-if="filteredProducts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       <template v-for="product in filteredProducts" :key="product.id">
         <ConfigurableProductCard
-          v-if="product.productType === 'configurable'"
+          v-if="product.productType === 'configurable' || product.customizable === true"
           :product="product"
         />
         <ProductCard
