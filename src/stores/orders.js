@@ -157,7 +157,13 @@ export const useOrdersStore = defineStore('orders', () => {
           message += `👥 Tamaño: ${config.size} personas (${sizeInfo})\n`
         }
 
-        // Rellenos principales
+        // Relleno principal (ahora es selección única)
+        if (config.filling) {
+          const fillingInfo = getFillingInfo(config.filling)
+          message += `🥧 Relleno seleccionado: ${fillingInfo.name} (${fillingInfo.category})\n`
+        }
+
+        // Compatibilidad con formato anterior (múltiples rellenos)
         if (config.fillings && config.fillings.length > 0) {
           message += `🥧 Rellenos seleccionados:\n`
           config.fillings.forEach(filling => {

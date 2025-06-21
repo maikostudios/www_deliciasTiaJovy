@@ -141,16 +141,18 @@
                     {{ category.name }}
                   </h5>
                   <div class="grid grid-cols-1 gap-2">
-                    <label 
-                      v-for="filling in getFillingsByCategory(category.id)" 
+                    <label
+                      v-for="filling in getFillingsByCategory(category.id)"
                       :key="filling.id"
                       class="flex items-center space-x-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer"
+                      :class="{ 'border-primary bg-primary/5': selectedFilling === filling.id }"
                     >
                       <input
-                        v-model="selectedFillings"
+                        v-model="selectedFilling"
                         :value="filling.id"
-                        type="checkbox"
-                        class="text-primary border-gray-300 rounded focus:ring-primary"
+                        type="radio"
+                        name="cake-filling"
+                        class="text-primary border-gray-300 focus:ring-primary"
                       />
                       <span class="text-sm text-gray-700">{{ filling.name }}</span>
                     </label>
@@ -277,7 +279,7 @@ const productsStore = useProductsStore()
 // Modal state
 const showModal = ref(false)
 const selectedSize = ref(null)
-const selectedFillings = ref([])
+const selectedFilling = ref(null) // Cambiado a selección única
 const selectedExtras = ref([])
 const imageError = ref(false)
 
@@ -361,7 +363,7 @@ const totalPrice = computed(() => {
 })
 
 const canAddToCart = computed(() => {
-  return selectedSize.value && selectedFillings.value.length > 0
+  return selectedSize.value && selectedFilling.value
 })
 
 // Methods
@@ -375,7 +377,7 @@ const openConfigModal = () => {
   showModal.value = true
   // Reset selections
   selectedSize.value = null
-  selectedFillings.value = []
+  selectedFilling.value = null
   selectedExtras.value = []
 }
 
@@ -394,7 +396,7 @@ const addToCart = () => {
     price: totalPrice.value,
     configuration: {
       size: selectedSize.value,
-      fillings: selectedFillings.value,
+      filling: selectedFilling.value, // Cambiado a singular
       extras: selectedExtras.value
     }
   }
