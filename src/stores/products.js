@@ -20,6 +20,41 @@ export const useProductsStore = defineStore('products', () => {
   const selectedCategory = ref('all')
   const searchQuery = ref('')
 
+  // Cake configuration
+  const cakeConfig = ref({
+    sizes: [
+      { people: 10, price: 22000 },
+      { people: 15, price: 27000 },
+      { people: 20, price: 32000 },
+      { people: 25, price: 37000 },
+      { people: 30, price: 42000 },
+      { people: 35, price: 47000 },
+      { people: 40, price: 52000 }
+    ],
+    fillings: [
+      { id: 'pina-crema-pina', name: 'Piña crema piña', category: 'frutal' },
+      { id: 'pina-crema-manjar', name: 'Piña crema manjar', category: 'frutal' },
+      { id: 'pina-crema-durazno', name: 'Piña crema durazno', category: 'frutal' },
+      { id: 'pina-crema-frutilla', name: 'Piña crema frutilla', category: 'frutal' },
+      { id: 'durazno-crema-durazno', name: 'Durazno crema durazno', category: 'frutal' },
+      { id: 'durazno-crema-manjar', name: 'Durazno crema manjar', category: 'frutal' },
+      { id: 'durazno-crema-frutilla', name: 'Durazno crema frutilla', category: 'frutal' },
+      { id: 'moca-tradicional', name: 'Moca tradicional pura crema', category: 'chocolate' },
+      { id: 'moca-durazno-manjar', name: 'Moca durazno manjar', category: 'chocolate' },
+      { id: 'frutilla-crema-frutilla', name: 'Frutilla crema frutilla', category: 'frutal' },
+      { id: 'frutilla-crema-manjar', name: 'Frutilla crema manjar', category: 'frutal' },
+      { id: 'selva-negra', name: 'Selva negra mermelada de ciruela crema manjar', category: 'chocolate' },
+      { id: 'frambuesa-crema-manjar', name: 'Frambuesa crema manjar', category: 'frutal' },
+      { id: 'frambuesa-crema-frambuesa', name: 'Frambuesa crema frambuesa', category: 'frutal' }
+    ],
+    extras: [
+      { id: 'lamina-comestible', name: 'Lámina comestible', price: 'variable', description: 'Precio según diseño' },
+      { id: 'topper', name: 'Topper personalizado', price: 'variable', description: 'Precio según diseño' },
+      { id: 'tercer-relleno', name: 'Tercer relleno', price: 3000, description: 'Relleno adicional' },
+      { id: 'nueces', name: 'Nueces', price: 2500, description: 'Agregado de nueces' }
+    ]
+  })
+
   // Categories
   const categories = computed(() => [
     { id: 'all', name: 'Todos', icon: '🍽️' },
@@ -203,6 +238,7 @@ export const useProductsStore = defineStore('products', () => {
     error,
     selectedCategory,
     searchQuery,
+    cakeConfig,
     // Getters
     categories,
     featuredProducts,

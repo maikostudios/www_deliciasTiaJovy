@@ -45,13 +45,13 @@
     <div class="flex items-center justify-between">
       <p class="text-gray-600">
         {{ filteredProducts.length }} producto{{ filteredProducts.length !== 1 ? 's' : '' }}
-        <span v-if="productsStore.selectedCategory !== 'todas' || productsStore.searchQuery">
+        <span v-if="productsStore.selectedCategory !== 'all' || productsStore.searchQuery">
           encontrado{{ filteredProducts.length !== 1 ? 's' : '' }}
         </span>
       </p>
       
       <button
-        v-if="productsStore.selectedCategory !== 'todas' || productsStore.searchQuery"
+        v-if="productsStore.selectedCategory !== 'all' || productsStore.searchQuery"
         @click="productsStore.clearFilters()"
         class="text-sm text-primary hover:text-primary/80 transition-colors duration-200"
       >

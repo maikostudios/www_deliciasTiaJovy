@@ -18,6 +18,7 @@ const sampleProducts = [
     featured: true,
     active: true,
     customizable: true,
+    productType: 'configurable',
     cakeConfig: {
       availableSizes: [10, 15, 20, 25, 30, 35, 40],
       availableFillings: ['chocolate', 'manjar', 'frutilla', 'durazno'],
@@ -34,6 +35,7 @@ const sampleProducts = [
     featured: true,
     active: true,
     customizable: true,
+    productType: 'configurable',
     cakeConfig: {
       availableSizes: [10, 15, 20, 25, 30, 35, 40],
       availableFillings: ['frutilla', 'crema-chantilly', 'manjar'],
@@ -49,7 +51,8 @@ const sampleProducts = [
     imageUrl: 'https://raw.githubusercontent.com/maikostudios/assets_delicias_tia_jovy/main/assets/img/productos/Panes/pan_amasado.jpg',
     featured: true,
     active: true,
-    customizable: false
+    customizable: false,
+    productType: 'simple'
   },
   {
     name: 'Empanadas de Pino',
@@ -60,7 +63,8 @@ const sampleProducts = [
     imageUrl: 'https://raw.githubusercontent.com/maikostudios/assets_delicias_tia_jovy/main/assets/img/productos/Salados/empanadas.jpg',
     featured: false,
     active: true,
-    customizable: false
+    customizable: false,
+    productType: 'simple'
   },
   {
     name: 'Torta Sin Azúcar',
@@ -71,7 +75,8 @@ const sampleProducts = [
     imageUrl: 'https://raw.githubusercontent.com/maikostudios/assets_delicias_tia_jovy/main/assets/img/productos/Postres/torta_sin_azucar.jpg',
     featured: true,
     active: true,
-    customizable: false
+    customizable: false,
+    productType: 'simple'
   },
   {
     name: 'Combo Desayuno',
@@ -82,7 +87,8 @@ const sampleProducts = [
     imageUrl: 'https://raw.githubusercontent.com/maikostudios/assets_delicias_tia_jovy/main/assets/img/productos/Combos/combo_desayuno.jpg',
     featured: true,
     active: true,
-    customizable: false
+    customizable: false,
+    productType: 'simple'
   }
 ]
 
