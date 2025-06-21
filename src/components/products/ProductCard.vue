@@ -20,14 +20,14 @@
       
       <!-- Category Badge -->
       <div class="absolute top-2 left-2">
-        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-700">
+        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-700" style="font-size: clamp(0.75rem, 1.8vw, 0.875rem); padding: clamp(0.25rem, 1vw, 0.375rem) clamp(0.5rem, 1.5vw, 0.75rem);">
           {{ getCategoryEmoji(product.category) }} {{ getCategoryName(product.category) }}
         </span>
       </div>
       
       <!-- Offer Badge -->
       <div v-if="product.originalPrice" class="absolute top-2 right-2">
-        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-500 text-white">
+        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-500 text-white" style="font-size: clamp(0.75rem, 1.8vw, 0.875rem); padding: clamp(0.25rem, 1vw, 0.375rem) clamp(0.5rem, 1.5vw, 0.75rem);">
           🏷️ Oferta
         </span>
       </div>

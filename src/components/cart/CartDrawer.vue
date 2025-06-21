@@ -1,56 +1,59 @@
 <template>
-  <!-- Overlay -->
+  <!-- Modal Overlay -->
   <div
     v-if="cartStore.isDrawerOpen"
-    class="fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300"
+    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity duration-300"
     @click="cartStore.closeDrawer()"
-  ></div>
-
-  <!-- Drawer -->
-  <div
-    :class="[
-      'fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out',
-      'md:max-w-md', // En desktop mantener ancho máximo
-      'sm:w-full', // En móvil ocupar toda la pantalla
-      cartStore.isDrawerOpen ? 'translate-x-0' : 'translate-x-full'
-    ]"
   >
-    <div class="flex flex-col h-full">
+    <!-- Modal Content -->
+    <div
+      :class="[
+        'bg-white shadow-xl z-50 transform transition-all duration-300 ease-out',
+        'w-full sm:w-auto sm:min-w-[28rem] sm:max-w-[32rem]',
+        'max-h-[90vh] sm:max-h-[85vh]',
+        'rounded-t-2xl sm:rounded-2xl',
+        'flex flex-col',
+        cartStore.isDrawerOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-full opacity-0 scale-95'
+      ]"
+      @click.stop
+      style="padding-bottom: env(safe-area-inset-bottom);"
+    >
       <!-- Header -->
-      <div class="flex items-center justify-between p-4 border-b border-gray-200">
-        <h2 class="text-lg font-semibold text-gray-900">
+      <div class="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 bg-gray-50 rounded-t-2xl sm:rounded-t-2xl">
+        <h2 class="text-lg sm:text-xl font-semibold text-gray-900">
           Tu Carrito ({{ cartStore.itemCount }})
         </h2>
         <button
           @click="cartStore.closeDrawer()"
-          class="p-2 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+          class="p-2 text-gray-400 hover:text-gray-600 transition-colors duration-200 touch-manipulation rounded-full hover:bg-gray-200"
+          aria-label="Cerrar carrito"
         >
-          <XMarkIcon class="h-6 w-6" />
+          <XMarkIcon class="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 
       <!-- Cart Items -->
-      <div class="flex-1 overflow-y-auto p-4">
-        <div v-if="cartStore.items.length === 0" class="text-center py-8">
-          <div class="text-6xl mb-4">🛒</div>
-          <h3 class="text-lg font-medium text-gray-900 mb-2">Tu carrito está vacío</h3>
-          <p class="text-gray-500 mb-4">¡Agrega algunos productos deliciosos!</p>
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6">
+        <div v-if="cartStore.items.length === 0" class="text-center py-8 sm:py-12">
+          <div class="text-4xl sm:text-6xl mb-4">🛒</div>
+          <h3 class="text-lg sm:text-xl font-medium text-gray-900 mb-2">Tu carrito está vacío</h3>
+          <p class="text-gray-500 mb-4 sm:mb-6">¡Agrega algunos productos deliciosos!</p>
           <button
             @click="cartStore.closeDrawer()"
-            class="btn-primary"
+            class="btn-primary px-6 py-3"
           >
             Ir a la Tienda
           </button>
         </div>
 
-        <div v-else class="space-y-4">
+        <div v-else class="space-y-3 sm:space-y-4">
           <div
             v-for="item in cartStore.items"
             :key="item.id"
-            class="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg"
+            class="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-gray-50 rounded-lg"
           >
             <!-- Product Image -->
-            <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
                 v-if="item.image"
                 :src="item.image"
@@ -58,28 +61,28 @@
                 class="w-full h-full object-cover"
                 @error="$event.target.style.display = 'none'"
               />
-              <span v-else class="text-2xl">🧁</span>
+              <span v-else class="text-xl sm:text-2xl">🧁</span>
             </div>
 
             <!-- Product Info -->
             <div class="flex-1 min-w-0">
-              <h4 class="text-sm font-medium text-gray-900 truncate">{{ item.name }}</h4>
+              <h4 class="text-sm sm:text-base font-medium text-gray-900 truncate">{{ item.name }}</h4>
               <p class="text-sm text-gray-500">{{ formatPrice(item.price) }}</p>
-              
+
               <!-- Quantity Controls -->
-              <div class="flex items-center space-x-2 mt-2">
+              <div class="flex items-center space-x-2 sm:space-x-3 mt-2">
                 <button
                   @click="cartStore.updateQuantity(item.id, item.quantity - 1)"
-                  class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+                  class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200 touch-manipulation"
                 >
-                  <MinusIcon class="h-4 w-4" />
+                  <MinusIcon class="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
-                <span class="text-sm font-medium w-8 text-center">{{ item.quantity }}</span>
+                <span class="text-sm sm:text-base font-medium w-8 sm:w-10 text-center">{{ item.quantity }}</span>
                 <button
                   @click="cartStore.updateQuantity(item.id, item.quantity + 1)"
-                  class="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+                  class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200 touch-manipulation"
                 >
-                  <PlusIcon class="h-4 w-4" />
+                  <PlusIcon class="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>
@@ -96,24 +99,24 @@
       </div>
 
       <!-- Footer -->
-      <div v-if="cartStore.items.length > 0" class="border-t border-gray-200 p-4 space-y-4">
+      <div v-if="cartStore.items.length > 0" class="border-t border-gray-200 p-4 sm:p-6 space-y-4 bg-gray-50 rounded-b-2xl sm:rounded-b-2xl">
         <!-- Total -->
         <div class="flex justify-between items-center">
-          <span class="text-lg font-semibold text-gray-900">Total:</span>
-          <span class="text-xl font-bold text-primary">{{ cartStore.formattedTotal }}</span>
+          <span class="text-lg sm:text-xl font-semibold text-gray-900">Total:</span>
+          <span class="text-xl sm:text-2xl font-bold text-primary">{{ cartStore.formattedTotal }}</span>
         </div>
 
         <!-- Action Buttons -->
-        <div class="space-y-2">
+        <div class="space-y-3">
           <button
             @click="handleMakeOrder"
-            class="w-full btn-primary"
+            class="w-full btn-primary py-3 sm:py-4 text-base sm:text-lg touch-manipulation"
           >
             Hacer Pedido 📱
           </button>
           <button
             @click="cartStore.clearCart()"
-            class="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+            class="w-full py-3 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors duration-200 touch-manipulation"
           >
             Vaciar Carrito
           </button>

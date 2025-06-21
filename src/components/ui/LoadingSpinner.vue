@@ -1,7 +1,7 @@
 <template>
   <div :class="containerClass">
-    <div :class="spinnerClass">
-      <div class="animate-spin rounded-full border-2 border-current border-t-transparent">
+    <div :class="spinnerClass" :style="spinnerStyle">
+      <div class="animate-spin rounded-full border-2 border-current border-t-transparent w-full h-full">
         <div class="sr-only">{{ message }}</div>
       </div>
     </div>
@@ -48,6 +48,15 @@ const sizeClasses = {
   xl: 'w-16 h-16'
 }
 
+// Responsive size styles
+const responsiveSizeStyles = {
+  xs: 'width: clamp(1rem, 3vw, 1.25rem); height: clamp(1rem, 3vw, 1.25rem);',
+  sm: 'width: clamp(1.25rem, 4vw, 1.5rem); height: clamp(1.25rem, 4vw, 1.5rem);',
+  md: 'width: clamp(1.5rem, 5vw, 2rem); height: clamp(1.5rem, 5vw, 2rem);',
+  lg: 'width: clamp(2rem, 6vw, 3rem); height: clamp(2rem, 6vw, 3rem);',
+  xl: 'width: clamp(3rem, 8vw, 4rem); height: clamp(3rem, 8vw, 4rem);'
+}
+
 const colorClasses = {
   primary: 'text-primary',
   secondary: 'text-secondary',
@@ -75,6 +84,10 @@ const spinnerClass = computed(() => {
     sizeClasses[props.size],
     colorClasses[props.color]
   ].join(' ')
+})
+
+const spinnerStyle = computed(() => {
+  return responsiveSizeStyles[props.size] || responsiveSizeStyles.md
 })
 
 const messageClass = computed(() => {

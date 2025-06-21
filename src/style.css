@@ -6,7 +6,18 @@
   html {
     font-family: 'Inter', system-ui, sans-serif;
   }
-  
+
+  body {
+    /* Add padding for floating cart button on mobile */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  @media (max-width: 48rem) {
+    body {
+      padding-bottom: calc(env(safe-area-inset-bottom) + 6.25rem);
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', system-ui, sans-serif;
   }
@@ -14,15 +25,24 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    min-height: 2.75rem;
+    touch-action: manipulation;
   }
-  
+
   .btn-secondary {
-    @apply bg-secondary hover:bg-secondary/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2.5 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    min-height: 2.75rem;
+    touch-action: manipulation;
   }
-  
+
   .btn-accent {
-    @apply bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply bg-accent hover:bg-accent/90 text-white font-semibold py-2.5 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    min-height: 2.75rem;
+    touch-action: manipulation;
   }
   
   .card {
@@ -30,7 +50,12 @@
   }
   
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+    @apply w-full px-4 py-3 sm:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+    /* Prevent zoom on iOS with responsive font size */
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    /* Better touch targets with relative units */
+    min-height: clamp(2.75rem, 6vw, 3rem);
+    touch-action: manipulation;
   }
   
   .gradient-bg {
@@ -39,5 +64,38 @@
   
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  /* Responsive padding utilities */
+  .p-responsive {
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .px-responsive {
+    padding-left: clamp(1rem, 3vw, 1.5rem);
+    padding-right: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .py-responsive {
+    padding-top: clamp(1rem, 3vw, 1.5rem);
+    padding-bottom: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  /* Responsive spacing utilities */
+  .space-responsive > * + * {
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* Responsive text sizes */
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+
+  .text-responsive-base {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 3vw, 1.25rem);
   }
 }

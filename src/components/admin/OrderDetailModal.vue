@@ -338,14 +338,14 @@ const printOrder = () => {
         `).join('')}
       </div>
       
-      <div style="margin: 20px 0;">
+      <div style="margin: 1.25rem 0;">
         <h3>Total: ${formatCurrency(props.order.total)}</h3>
         <p><strong>Fecha:</strong> ${formatDate(props.order.createdAt)}</p>
         <p><strong>Estado:</strong> ${currentStatus.value}</p>
       </div>
       
       ${props.order.comments ? `
-        <div style="margin: 20px 0;">
+        <div style="margin: 1.25rem 0;">
           <h3>Comentarios:</h3>
           <p>${props.order.comments}</p>
         </div>

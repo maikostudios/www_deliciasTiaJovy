@@ -115,7 +115,7 @@
         </div>
       </div>
       
-      <div class="mt-6 p-4 bg-green-50 rounded-lg">
+      <div class="mt-6 p-4 bg-green-50 rounded-lg" style="padding: clamp(1rem, 3vw, 1.5rem);">
         <p class="text-sm text-green-800 mb-2">
           🎨 <strong>Combinaciones personalizadas:</strong>
         </p>

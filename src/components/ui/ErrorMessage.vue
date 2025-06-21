@@ -186,6 +186,9 @@ const messageClass = computed(() => {
 <style scoped>
 .btn-sm {
   @apply px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-200;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  padding: clamp(0.375rem, 1.5vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+  min-height: 2rem;
 }
 
 .btn-outline {

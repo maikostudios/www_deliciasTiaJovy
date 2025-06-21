@@ -134,6 +134,8 @@ const handleLogoError = (event) => {
 <style scoped>
 .nav-link {
   @apply text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
 }
 
 .nav-link-active {
@@ -142,6 +144,10 @@ const handleLogoError = (event) => {
 
 .mobile-nav-link {
   @apply text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200;
+  font-size: clamp(1rem, 3vw, 1.125rem);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(0.75rem, 2vw, 1rem);
+  min-height: 2.75rem;
+  touch-action: manipulation;
 }
 
 .mobile-nav-link-active {

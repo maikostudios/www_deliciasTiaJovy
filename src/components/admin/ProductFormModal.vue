@@ -27,7 +27,7 @@
                 v-model="form.name"
                 type="text"
                 required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                class="input-field"
                 placeholder="Ej: Torta de Chocolate"
               />
             </div>
@@ -39,7 +39,7 @@
               <select
                 v-model="form.category"
                 required
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                class="input-field"
               >
                 <option value="">Seleccionar categoría</option>
                 <option value="tortas">🎂 Tortas</option>
@@ -59,7 +59,7 @@
               v-model="form.description"
               required
               rows="3"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              class="input-field"
               placeholder="Describe el producto, ingredientes, características especiales..."
             ></textarea>
           </div>
@@ -134,7 +134,7 @@
                   <input
                     v-model="form.imageUrl"
                     type="url"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    class="input-field"
                     placeholder="https://ejemplo.com/imagen.jpg"
                   />
                 </div>
@@ -150,7 +150,7 @@
                     type="file"
                     accept="image/*"
                     @change="handleFileUpload"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    class="input-field"
                   />
                   <p class="text-xs text-gray-500 mt-1">JPG, PNG, máximo 2MB</p>
                 </div>
@@ -271,14 +271,14 @@
           <button
             type="button"
             @click="$emit('close')"
-            class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            class="btn-secondary"
           >
             Cancelar
           </button>
           <button
             type="submit"
             :disabled="loading"
-            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
+            class="btn-primary disabled:opacity-50"
           >
             <span v-if="loading">Guardando...</span>
             <span v-else>{{ isEditing ? 'Actualizar' : 'Crear' }} Producto</span>

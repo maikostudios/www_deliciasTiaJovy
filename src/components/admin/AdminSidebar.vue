@@ -4,7 +4,7 @@
     <div class="hidden md:flex md:w-64 md:flex-col">
       <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r border-gray-200">
         <!-- Logo -->
-        <div class="flex items-center flex-shrink-0 px-4">
+        <div class="flex items-center flex-shrink-0 px-4" style="padding-left: clamp(1rem, 3vw, 1.5rem); padding-right: clamp(1rem, 3vw, 1.5rem);">
           <div class="flex items-center">
             <span class="text-2xl">🧁</span>
             <div class="ml-3">
@@ -15,7 +15,7 @@
         </div>
 
         <!-- Navigation -->
-        <nav class="mt-8 flex-1 px-2 space-y-1">
+        <nav class="mt-8 flex-1 px-2 space-y-1" style="padding-left: clamp(0.5rem, 2vw, 1rem); padding-right: clamp(0.5rem, 2vw, 1rem);">
           <template v-for="item in navigation" :key="item.id">
             <button
               @click="$emit('navigate', item.id)"
@@ -23,7 +23,8 @@
                 item.id === activeSection
                   ? 'bg-primary text-white'
                   : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                'group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors duration-200'
+                'group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full text-left transition-colors duration-200'"
+              style="font-size: clamp(0.875rem, 2vw, 1rem); padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.5rem, 1.5vw, 0.75rem); min-height: 2.5rem;"
               ]"
             >
               <span class="text-lg mr-3">{{ item.icon }}</span>
