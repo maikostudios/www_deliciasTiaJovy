@@ -175,13 +175,19 @@
                         <span class="inline-block w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
                         <span>👥 {{ item.configuration.size }} personas</span>
                       </div>
-                      <div v-if="item.configuration.fillings && item.configuration.fillings.length > 0" class="flex items-start">
+                      <!-- Relleno único (nuevo formato) -->
+                      <div v-if="item.configuration.filling" class="flex items-start">
+                        <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-2 mt-1"></span>
+                        <span>🥧 {{ getFillingDisplayName(item.configuration.filling) }}</span>
+                      </div>
+                      <!-- Rellenos múltiples (formato anterior - compatibilidad) -->
+                      <div v-else-if="item.configuration.fillings && item.configuration.fillings.length > 0" class="flex items-start">
                         <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-2 mt-1"></span>
                         <span>🥧 {{ item.configuration.fillings.join(', ') }}</span>
                       </div>
                       <div v-if="item.configuration.extras && item.configuration.extras.length > 0" class="flex items-start">
                         <span class="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2 mt-1"></span>
-                        <span>✨ {{ item.configuration.extras.join(', ') }}</span>
+                        <span>✨ {{ item.configuration.extras.map(extra => getExtraDisplayName(extra)).join(', ') }}</span>
                       </div>
                     </div>
                   </div>
@@ -373,6 +379,38 @@ const refreshOrders = () => {
 const handleStatusUpdate = () => {
   // Refresh orders after status update
   refreshOrders()
+}
+
+// Función para mostrar nombres legibles de rellenos
+const getFillingDisplayName = (fillingId) => {
+  const fillings = {
+    'pina-crema-pina': 'Piña con crema de piña',
+    'pina-crema-manjar': 'Piña con crema de manjar',
+    'pina-crema-durazno': 'Piña con crema de durazno',
+    'pina-crema-frutilla': 'Piña con crema de frutilla',
+    'durazno-crema-durazno': 'Durazno con crema de durazno',
+    'durazno-crema-manjar': 'Durazno con crema de manjar',
+    'durazno-crema-frutilla': 'Durazno con crema de frutilla',
+    'moca-tradicional': 'Moca tradicional pura crema',
+    'moca-durazno-manjar': 'Moca con durazno y manjar',
+    'frutilla-crema-frutilla': 'Frutilla con crema de frutilla',
+    'frutilla-crema-manjar': 'Frutilla con crema de manjar',
+    'selva-negra': 'Selva negra mermelada de ciruela crema manjar',
+    'frambuesa-crema-manjar': 'Frambuesa con crema de manjar',
+    'frambuesa-crema-frambuesa': 'Frambuesa con crema de frambuesa'
+  }
+  return fillings[fillingId] || fillingId
+}
+
+// Función para mostrar nombres legibles de extras
+const getExtraDisplayName = (extraId) => {
+  const extras = {
+    'lamina-comestible': 'Lámina comestible personalizada',
+    'topper': 'Topper personalizado',
+    'tercer-relleno': 'Tercer relleno adicional',
+    'nueces': 'Agregado de nueces'
+  }
+  return extras[extraId] || extraId
 }
 
 onMounted(() => {
