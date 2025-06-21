@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen">
     <!-- Header -->
-    <section class="bg-white border-b border-gray-200">
+    <section class="bg-transparent-white border-b border-gray-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="text-center">
           <h1 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">

@@ -191,7 +191,6 @@ export const useOrdersStore = defineStore('orders', () => {
 
     message += `\n💰 RESUMEN FINANCIERO:\n`
     message += `• Subtotal productos: $${total.toLocaleString()}\n`
-    message += `• Delivery: Se coordinará retiro o delivery con la pastelera\n`
     message += `• TOTAL PEDIDO: $${total.toLocaleString()}\n\n`
 
     // Comentarios generales del pedido
@@ -204,8 +203,9 @@ export const useOrdersStore = defineStore('orders', () => {
     message += `📋 INFORMACIÓN IMPORTANTE:\n`
     message += `• Pago: 50% anticipo + 50% contra entrega\n`
     message += `• Tiempo de preparación: Se coordina según producto\n`
-    message += `• Delivery disponible en Nueva Imperial y alrededores\n`
-    message += `• Para tortas: confirmar fecha de entrega con 48hrs de anticipación\n\n`
+    message += `• Se Prefiere que el Cliente retire su pedido en el LOCAL  .\n`
+    message += `El Delivery puede estar disponible en Nueva Imperial y alrededores (Labranza, Temuco, Carahue ,  Sectores Rurales , o a convenir ) con un pago Extra dependiendo la distancia que se coordinará con la Pastelera según disponibilidad.\n`
+    message += `• Para tortas: confirmar fecha de entrega con mínimo de 48hrs de anticipación\n\n`
 
     message += `📅 Fecha del pedido: ${new Date().toLocaleDateString('es-CL', {
       weekday: 'long',

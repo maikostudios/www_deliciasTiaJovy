@@ -54,7 +54,7 @@
     </section>
 
     <!-- Brand Showcase & Location Section -->
-    <section id="brand-location" class="py-12 bg-white">
+    <section id="brand-location" class="py-12 bg-transparent-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <!-- Brand Showcase -->
@@ -133,7 +133,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="py-16 lg:py-24 bg-white">
+    <section class="py-16 lg:py-24 bg-transparent-light">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <!-- Image -->
@@ -199,7 +199,7 @@
     </section>
 
     <!-- Featured Products -->
-    <section id="productos-destacados" class="py-16 lg:py-24 bg-gray-50">
+    <section id="productos-destacados" class="py-16 lg:py-24 bg-transparent-gray">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">
@@ -252,7 +252,7 @@
     </section>
 
     <!-- Location Section with Map -->
-    <section id="ubicacion" class="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section id="ubicacion" class="py-16 lg:py-24 bg-transparent-gray">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="text-center mb-12">

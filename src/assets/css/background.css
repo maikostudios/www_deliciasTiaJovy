@@ -1,0 +1,52 @@
+/* Fondo personalizado global para Delicias Tía Jovy */
+
+/* Aplicar el fondo SVG al html y body */
+html, body {
+  background-image: url('/images/fondo-web.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+/* Asegurar que el fondo se mantenga en el contenedor principal */
+#app {
+  background: transparent;
+  min-height: 100vh;
+}
+
+/* Overlay para mejorar legibilidad del contenido */
+.content-overlay {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(1px);
+}
+
+/* Clases para fondos semi-transparentes */
+.bg-semi-white {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.bg-semi-gray {
+  background-color: rgba(249, 250, 251, 0.85);
+}
+
+.bg-semi-light {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Asegurar que las secciones no oculten el fondo */
+section {
+  position: relative;
+}
+
+/* Debugging: hacer el fondo más visible temporalmente */
+.debug-background {
+  background-image: url('/images/fondo-web.svg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  opacity: 1 !important;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Background - Delicias Tía Jovy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('/images/fondo-web.svg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #f9fafb;
+            font-family: Arial, sans-serif;
+        }
+        
+        .content {
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 50px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>🧁 Test de Fondo SVG - Delicias Tía Jovy</h1>
+        <p>Esta página prueba si el fondo SVG se carga correctamente.</p>
+        
+        <div class="test-section">
+            <h2>Información del Fondo</h2>
+            <p>Archivo: /images/fondo-web.svg</p>
+            <p>Si puedes ver un patrón de fondo detrás de este contenido, ¡el SVG está funcionando!</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Prueba de Transparencia</h2>
+            <p>Este contenido tiene fondo semi-transparente para mostrar el patrón SVG.</p>
+        </div>
+        
+        <div class="test-section" style="background: rgba(255, 255, 255, 0.5);">
+            <h2>Más Transparente</h2>
+            <p>Esta sección es aún más transparente para ver mejor el fondo.</p>
+        </div>
+        
+        <a href="/" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #e91e63; color: white; text-decoration: none; border-radius: 5px;">
+            Volver a la Aplicación
+        </a>
+    </div>
+</body>
+</html>
