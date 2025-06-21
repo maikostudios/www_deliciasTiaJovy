@@ -25,7 +25,7 @@ dist-ssr
 
 # Firebase
 .firebase
-.firebaserc
+# .firebaserc - INCLUDED in repo for project configuration
 firebase-debug.log
 firebase-debug.*.log
 
