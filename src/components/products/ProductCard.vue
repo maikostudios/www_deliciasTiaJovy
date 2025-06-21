@@ -4,8 +4,8 @@
     <div class="relative mb-4 overflow-hidden rounded-lg bg-gray-100">
       <div class="aspect-square w-full">
         <img
-          v-if="product.image"
-          :src="product.image"
+          v-if="productImageUrl && !imageError"
+          :src="productImageUrl"
           :alt="product.name"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           @error="handleImageError"
@@ -57,6 +57,7 @@
 
     <!-- Add to Cart Button -->
     <button
+      v-if="!preview"
       @click="handleAddToCart"
       class="w-full mt-4 btn-primary group-hover:shadow-lg"
       :class="{ 'animate-pulse': isAdding }"
@@ -67,6 +68,11 @@
       </span>
       <span v-else>Agregando...</span>
     </button>
+
+    <!-- Preview Badge -->
+    <div v-if="preview" class="w-full mt-4 bg-blue-100 text-blue-800 text-center py-3 rounded-lg font-medium">
+      👁️ Vista Previa del Producto
+    </div>
   </div>
 </template>
 
@@ -80,14 +86,24 @@ const props = defineProps({
   product: {
     type: Object,
     required: true
+  },
+  preview: {
+    type: Boolean,
+    default: false
   }
 })
 
 const cartStore = useCartStore()
 const productsStore = useProductsStore()
 const isAdding = ref(false)
+const imageError = ref(false)
 
 const formatPrice = (price) => productsStore.formatPrice(price)
+
+// Computed para obtener la URL de imagen correcta
+const productImageUrl = computed(() => {
+  return productsStore.getProductImageUrl(props.product, 'medium')
+})
 
 const discountPercentage = computed(() => {
   if (!props.product.originalPrice) return 0
@@ -115,6 +131,8 @@ const getCategoryName = (category) => {
 }
 
 const handleImageError = (event) => {
+  console.warn('⚠️ Error al cargar imagen del producto:', props.product.name, props.product.imageUrl)
+  imageError.value = true
   event.target.style.display = 'none'
 }
 

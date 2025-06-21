@@ -71,26 +71,46 @@
       </div>
 
       <!-- Mobile Navigation -->
-      <div v-show="isMenuOpen" class="md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
-          <RouterLink
-            to="/"
-            @click="isMenuOpen = false"
-            class="mobile-nav-link"
-            :class="{ 'mobile-nav-link-active': $route.name === 'home' }"
-          >
-            Inicio
-          </RouterLink>
-          <RouterLink
-            to="/tienda"
-            @click="isMenuOpen = false"
-            class="mobile-nav-link"
-            :class="{ 'mobile-nav-link-active': $route.name === 'tienda' }"
-          >
-            Tienda
-          </RouterLink>
+      <Transition
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="transform scale-95 opacity-0"
+        enter-to-class="transform scale-100 opacity-100"
+        leave-active-class="transition duration-75 ease-in"
+        leave-from-class="transform scale-100 opacity-100"
+        leave-to-class="transform scale-95 opacity-0"
+      >
+        <div v-show="isMenuOpen" class="md:hidden">
+          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 bg-white">
+            <RouterLink
+              to="/"
+              @click="isMenuOpen = false"
+              class="mobile-nav-link"
+              :class="{ 'mobile-nav-link-active': $route.name === 'home' }"
+            >
+              🏠 Inicio
+            </RouterLink>
+            <RouterLink
+              to="/tienda"
+              @click="isMenuOpen = false"
+              class="mobile-nav-link"
+              :class="{ 'mobile-nav-link-active': $route.name === 'tienda' }"
+            >
+              🛒 Tienda
+            </RouterLink>
+
+            <!-- Cart info in mobile -->
+            <div class="mobile-nav-link border-t border-gray-200 mt-2 pt-2">
+              <div class="flex items-center justify-between">
+                <span class="text-gray-600">🛒 Carrito</span>
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm text-gray-500">{{ cartStore.itemCount }} items</span>
+                  <span class="text-sm font-medium text-primary">{{ cartStore.formattedTotal }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </Transition>
     </div>
   </nav>
 </template>

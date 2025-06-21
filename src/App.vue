@@ -16,6 +16,9 @@
     
     <!-- Footer -->
     <Footer />
+
+    <!-- Toast Notifications -->
+    <Toast ref="toastRef" />
   </div>
 </template>
 
@@ -25,6 +28,7 @@ import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
 import CartDrawer from './components/cart/CartDrawer.vue'
 import OrderModal from './components/order/OrderModal.vue'
+import Toast from './components/ui/Toast.vue'
 </script>
 
 <style scoped>

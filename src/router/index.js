@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,17 +35,37 @@ const router = createRouter({
       meta: {
         title: 'Iniciar Sesión - Delicias Tía Jovy'
       }
+    },
+    {
+      path: '/admin/productos/nuevo',
+      name: 'admin-product-new',
+      component: () => import('@/views/admin/ProductFormView.vue'),
+      meta: {
+        title: 'Nuevo Producto - Admin',
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/admin/productos/editar/:id',
+      name: 'admin-product-edit',
+      component: () => import('@/views/admin/ProductFormView.vue'),
+      meta: {
+        title: 'Editar Producto - Admin',
+        requiresAuth: true
+      }
     }
   ]
 })
 
 // Navigation guard for protected routes
 router.beforeEach(async (to, from, next) => {
+  // Import authStore inside the guard to avoid circular dependency
+  const { useAuthStore } = await import('@/stores/auth')
   const authStore = useAuthStore()
-  
+
   // Update page title
   document.title = to.meta.title || 'Delicias Tía Jovy'
-  
+
   // Check if route requires authentication
   if (to.meta.requiresAuth) {
     if (!authStore.isAuthenticated) {
@@ -54,7 +73,7 @@ router.beforeEach(async (to, from, next) => {
       return
     }
   }
-  
+
   next()
 })
 

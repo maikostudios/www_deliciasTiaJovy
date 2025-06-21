@@ -70,15 +70,24 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useCartStore } from '@/stores/cart'
+import { useProductsStore } from '@/stores/products'
 import ProductGrid from '@/components/products/ProductGrid.vue'
 import PromoBanner from '@/components/layout/PromoBanner.vue'
 import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
 
 const cartStore = useCartStore()
+const productsStore = useProductsStore()
 const loading = ref(false)
 
-onMounted(() => {
-  // Simulate loading if needed (e.g., fetching products from API)
-  // For now, products are static in the store
+onMounted(async () => {
+  // Load products from Firebase
+  loading.value = true
+  try {
+    await productsStore.fetchProducts()
+  } catch (error) {
+    console.error('Error loading products:', error)
+  } finally {
+    loading.value = false
+  }
 })
 </script>

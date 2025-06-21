@@ -1,10 +1,15 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 export const useCartStore = defineStore('cart', () => {
-  // State
-  const items = ref([])
+  // State - Load from localStorage
+  const items = ref(JSON.parse(localStorage.getItem('cart-items') || '[]'))
   const isDrawerOpen = ref(false)
+
+  // Watch for changes and persist to localStorage
+  watch(items, (newItems) => {
+    localStorage.setItem('cart-items', JSON.stringify(newItems))
+  }, { deep: true })
 
   // Getters
   const itemCount = computed(() => {

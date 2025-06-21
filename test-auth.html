@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Autenticación - Delicias Tía Jovy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid;
+        }
+        .success {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #c2185b;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .credentials {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test de Autenticación</h1>
+        <p>Prueba el sistema de login de Delicias Tía Jovy</p>
+
+        <div class="credentials">
+            <h3>📋 Credenciales de Prueba:</h3>
+            <p><strong>Email:</strong> deliciastiajovy@gmail.com</p>
+            <p><strong>Password:</strong> 123456</p>
+        </div>
+
+        <div id="results"></div>
+
+        <h3>🔐 Test de Login</h3>
+        <input type="email" id="email" placeholder="Email" value="deliciastiajovy@gmail.com">
+        <input type="password" id="password" placeholder="Password" value="123456">
+        <button onclick="testLogin()">🚀 Probar Login</button>
+
+        <h3>🌐 Tests de Navegación</h3>
+        <button onclick="testPage('/')">🏠 Página Principal</button>
+        <button onclick="testPage('/login')">🔑 Login</button>
+        <button onclick="testPage('/admin')">⚙️ Admin</button>
+        <button onclick="testPage('/tienda')">🛒 Tienda</button>
+
+        <h3>🔥 Test de Firebase</h3>
+        <button onclick="testFirebase()">🔥 Probar Conexión Firebase</button>
+    </div>
+
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNf_WVQHbzxpHMykyTkBAmC_c2hZO9P3Y",
+            authDomain: "deliciastiajovy-6cd88.firebaseapp.com",
+            projectId: "deliciastiajovy-6cd88",
+            storageBucket: "deliciastiajovy-6cd88.firebasestorage.app",
+            messagingSenderId: "452372178228",
+            appId: "1:452372178228:web:a04c666848f1b8f722b161"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.testLogin = async function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            addResult('info', '🔄 Intentando login...');
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                addResult('success', `✅ Login exitoso! Usuario: ${userCredential.user.email}`);
+                
+                // Test redirect to admin
+                setTimeout(() => {
+                    addResult('info', '🔄 Redirigiendo al admin...');
+                    window.open('http://localhost:5173/admin', '_blank');
+                }, 1000);
+                
+            } catch (error) {
+                addResult('error', `❌ Error de login: ${error.message}`);
+            }
+        };
+
+        window.testPage = async function(path) {
+            addResult('info', `🔄 Probando página: ${path}`);
+            
+            try {
+                const response = await fetch(`http://localhost:5173${path}`);
+                if (response.ok) {
+                    addResult('success', `✅ Página ${path} carga correctamente (${response.status})`);
+                    window.open(`http://localhost:5173${path}`, '_blank');
+                } else {
+                    addResult('error', `❌ Error en página ${path}: ${response.status}`);
+                }
+            } catch (error) {
+                addResult('error', `❌ Error de conexión: ${error.message}`);
+            }
+        };
+
+        window.testFirebase = async function() {
+            addResult('info', '🔄 Probando conexión a Firebase...');
+            
+            try {
+                // Test Firestore connection
+                const ordersRef = collection(db, 'orders');
+                const snapshot = await getDocs(ordersRef);
+                addResult('success', `✅ Firebase conectado! Pedidos encontrados: ${snapshot.size}`);
+                
+                // Test products collection
+                const productsRef = collection(db, 'products');
+                const productsSnapshot = await getDocs(productsRef);
+                addResult('success', `✅ Productos encontrados: ${productsSnapshot.size}`);
+                
+            } catch (error) {
+                addResult('error', `❌ Error de Firebase: ${error.message}`);
+            }
+        };
+
+        function addResult(type, message) {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `${new Date().toLocaleTimeString()} - ${message}`;
+            results.appendChild(div);
+            results.scrollTop = results.scrollHeight;
+        }
+
+        // Initial test
+        addResult('info', '🚀 Sistema de test cargado. Listo para probar!');
+    </script>
+</body>
+</html>

@@ -44,56 +44,125 @@
 
         <!-- Customer Information -->
         <div class="space-y-4">
-          <h3 class="font-medium text-gray-900">Información de Contacto</h3>
-          
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-              Nombre Completo *
-            </label>
-            <input
-              id="name"
-              v-model="form.name"
-              type="text"
-              required
-              class="input-field"
-              placeholder="Tu nombre completo"
-            />
-          </div>
+          <h3 class="font-medium text-gray-900 flex items-center">
+            <span class="text-lg mr-2">👤</span>
+            Información de Contacto
+          </h3>
 
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-              Correo Electrónico *
-            </label>
-            <input
-              id="email"
-              v-model="form.email"
-              type="email"
-              required
-              class="input-field"
-              placeholder="tu@email.com"
-            />
-          </div>
-
-          <div>
-            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
-              Teléfono *
-            </label>
-            <div class="flex">
-              <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                +56
-              </span>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                Nombre Completo *
+              </label>
               <input
-                id="phone"
-                v-model="form.phone"
-                type="tel"
+                id="name"
+                v-model="form.name"
+                type="text"
                 required
-                class="input-field rounded-l-none"
-                placeholder="912345678"
-                pattern="[0-9]{9}"
-                maxlength="9"
+                class="input-field"
+                placeholder="Tu nombre completo"
               />
             </div>
-            <p class="text-xs text-gray-500 mt-1">Formato: 912345678 (sin espacios ni guiones)</p>
+
+            <div>
+              <label for="rut" class="block text-sm font-medium text-gray-700 mb-1">
+                RUT (opcional)
+              </label>
+              <input
+                id="rut"
+                v-model="form.rut"
+                type="text"
+                class="input-field"
+                placeholder="12.345.678-9"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                Correo Electrónico *
+              </label>
+              <input
+                id="email"
+                v-model="form.email"
+                type="email"
+                required
+                class="input-field"
+                placeholder="tu@email.com"
+              />
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">
+                Teléfono *
+              </label>
+              <div class="flex">
+                <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                  +56
+                </span>
+                <input
+                  id="phone"
+                  v-model="form.phone"
+                  type="tel"
+                  required
+                  class="input-field rounded-l-none"
+                  placeholder="912345678"
+                  pattern="[0-9]{9}"
+                  maxlength="9"
+                />
+              </div>
+              <p class="text-xs text-gray-500 mt-1">Formato: 912345678 (sin espacios ni guiones)</p>
+            </div>
+          </div>
+
+          <div>
+            <label for="birthDate" class="block text-sm font-medium text-gray-700 mb-1">
+              Fecha de Cumpleaños (opcional)
+            </label>
+            <input
+              id="birthDate"
+              v-model="form.birthDate"
+              type="date"
+              class="input-field"
+            />
+            <p class="text-xs text-gray-500 mt-1">Para enviarte felicitaciones especiales 🎂</p>
+          </div>
+
+          <!-- Social Media (Optional) -->
+          <div class="bg-gray-50 rounded-lg p-4">
+            <h4 class="text-sm font-medium text-gray-900 mb-3 flex items-center">
+              <span class="text-lg mr-2">📱</span>
+              Redes Sociales (opcional)
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="instagram" class="block text-sm font-medium text-gray-700 mb-1">
+                  Instagram
+                </label>
+                <input
+                  id="instagram"
+                  v-model="form.instagramLink"
+                  type="url"
+                  class="input-field"
+                  placeholder="https://instagram.com/tu_usuario"
+                />
+              </div>
+
+              <div>
+                <label for="facebook" class="block text-sm font-medium text-gray-700 mb-1">
+                  Facebook
+                </label>
+                <input
+                  id="facebook"
+                  v-model="form.facebookLink"
+                  type="url"
+                  class="input-field"
+                  placeholder="https://facebook.com/tu_perfil"
+                />
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">Para mantenerte informado de nuestras promociones especiales</p>
           </div>
 
           <div>
@@ -143,16 +212,22 @@ import { ref, computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import { useOrdersStore } from '@/stores/orders'
 import { useProductsStore } from '@/stores/products'
+import { useCustomersStore } from '@/stores/customers'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 
 const cartStore = useCartStore()
 const ordersStore = useOrdersStore()
 const productsStore = useProductsStore()
+const customersStore = useCustomersStore()
 
 const form = ref({
   name: '',
   email: '',
   phone: '',
+  rut: '',
+  birthDate: '',
+  instagramLink: '',
+  facebookLink: '',
   comments: ''
 })
 
@@ -176,6 +251,10 @@ const resetForm = () => {
     name: '',
     email: '',
     phone: '',
+    rut: '',
+    birthDate: '',
+    instagramLink: '',
+    facebookLink: '',
     comments: ''
   }
 }
@@ -183,37 +262,68 @@ const resetForm = () => {
 const handleSubmit = async () => {
   if (!isFormValid.value) return
 
-  const orderData = {
-    customerInfo: {
+  try {
+    // Prepare customer data
+    const customerData = {
       name: form.value.name.trim(),
       email: form.value.email.trim(),
-      phone: `+56${form.value.phone.trim()}`
-    },
-    items: cartStore.items.map(item => ({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      quantity: item.quantity,
-      category: item.category
-    })),
-    total: cartStore.totalPrice,
-    comments: form.value.comments.trim()
-  }
+      phone: `+56${form.value.phone.trim()}`,
+      rut: form.value.rut.trim() || null,
+      birthDate: form.value.birthDate || null,
+      instagramLink: form.value.instagramLink.trim() || null,
+      facebookLink: form.value.facebookLink.trim() || null
+    }
 
-  // Save to Firestore
-  const result = await ordersStore.createOrder(orderData)
+    // Create or update customer in database
+    const customerResult = await customersStore.createOrUpdateCustomer(customerData)
 
-  if (result.success) {
-    // Open WhatsApp with pre-filled message
-    ordersStore.openWhatsApp(orderData)
-    
-    // Clear cart and close modal
-    cartStore.clearCart()
-    ordersStore.closeOrderModal()
-    resetForm()
-    
-    // Show success message (you could add a toast notification here)
-    alert('¡Pedido enviado! Te redirigimos a WhatsApp para completar tu pedido.')
+    if (!customerResult.success) {
+      console.warn('Error saving customer data:', customerResult.error)
+      // Continue with order even if customer save fails
+    }
+
+    // Prepare order data
+    const orderData = {
+      customerInfo: {
+        name: customerData.name,
+        email: customerData.email,
+        phone: customerData.phone
+      },
+      items: cartStore.items.map(item => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        category: item.category,
+        configuration: item.configuration || null
+      })),
+      total: cartStore.totalPrice,
+      comments: form.value.comments.trim(),
+      customerId: customerResult.customerId || null
+    }
+
+    // Save order to Firestore
+    const orderResult = await ordersStore.createOrder(orderData)
+
+    if (orderResult.success) {
+      // Open WhatsApp with pre-filled message
+      ordersStore.openWhatsApp(orderData)
+
+      // Clear cart and close modal
+      cartStore.clearCart()
+      ordersStore.closeOrderModal()
+      resetForm()
+
+      // Show success message
+      const customerMessage = customerResult.isNew
+        ? '¡Bienvenido a nuestra familia de clientes! '
+        : '¡Gracias por volver! '
+
+      alert(`${customerMessage}Pedido enviado. Te redirigimos a WhatsApp para completar tu pedido.`)
+    }
+  } catch (error) {
+    console.error('Error processing order:', error)
+    alert('Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo.')
   }
 }
 </script>

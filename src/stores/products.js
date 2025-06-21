@@ -1,138 +1,51 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { 
+  collection, 
+  addDoc, 
+  getDocs, 
+  doc, 
+  updateDoc, 
+  deleteDoc, 
+  query, 
+  orderBy 
+} from 'firebase/firestore'
+import { db } from '@/main.js'
 
 export const useProductsStore = defineStore('products', () => {
   // State
-  const products = ref([
-    // Tortas
-    {
-      id: 1,
-      name: 'Torta de Chocolate',
-      price: 15000,
-      category: 'tortas',
-      image: '/images/torta-chocolate.jpg',
-      description: 'Deliciosa torta de chocolate con relleno de manjar',
-      featured: true
-    },
-    {
-      id: 2,
-      name: 'Torta de Frutilla',
-      price: 18000,
-      category: 'tortas',
-      image: '/images/torta-frutilla.jpg',
-      description: 'Torta esponjosa con crema y frutillas frescas',
-      featured: true
-    },
-    {
-      id: 3,
-      name: 'Torta Tres Leches',
-      price: 16000,
-      category: 'tortas',
-      image: '/images/torta-tres-leches.jpg',
-      description: 'Clásica torta tres leches con canela',
-      featured: false
-    },
-    
-    // Panadería
-    {
-      id: 4,
-      name: 'Pan Amasado',
-      price: 1500,
-      category: 'panaderia',
-      image: '/images/pan-amasado.jpg',
-      description: 'Pan amasado tradicional, recién horneado',
-      featured: true
-    },
-    {
-      id: 5,
-      name: 'Empanadas de Pino',
-      price: 2500,
-      category: 'panaderia',
-      image: '/images/empanadas.jpg',
-      description: 'Empanadas caseras de pino con huevo y aceituna',
-      featured: false
-    },
-    {
-      id: 6,
-      name: 'Sopaipillas',
-      price: 500,
-      category: 'panaderia',
-      image: '/images/sopaipillas.jpg',
-      description: 'Sopaipillas crujientes, perfectas para el té',
-      featured: false
-    },
-    
-    // Sin Azúcar
-    {
-      id: 7,
-      name: 'Torta Sin Azúcar',
-      price: 20000,
-      category: 'sin-azucar',
-      image: '/images/torta-sin-azucar.jpg',
-      description: 'Torta especial endulzada con stevia',
-      featured: true
-    },
-    {
-      id: 8,
-      name: 'Galletas Integrales',
-      price: 3000,
-      category: 'sin-azucar',
-      image: '/images/galletas-integrales.jpg',
-      description: 'Galletas integrales sin azúcar añadida',
-      featured: false
-    },
-    
-    // Ofertas
-    {
-      id: 9,
-      name: 'Combo Desayuno',
-      price: 8000,
-      category: 'ofertas',
-      image: '/images/combo-desayuno.jpg',
-      description: 'Pan amasado + mermelada + mantequilla + té',
-      featured: true,
-      originalPrice: 10000
-    },
-    {
-      id: 10,
-      name: 'Pack Cumpleaños',
-      price: 25000,
-      category: 'ofertas',
-      image: '/images/pack-cumpleanos.jpg',
-      description: 'Torta mediana + 12 cupcakes + velas',
-      featured: false,
-      originalPrice: 30000
-    }
-  ])
+  const products = ref([])
+  const loading = ref(false)
+  const error = ref(null)
+  const selectedCategory = ref('all')
+  const searchQuery = ref('')
 
-  const categories = ref([
-    { id: 'todas', name: 'Todas', icon: '🍰' },
+  // Categories
+  const categories = computed(() => [
+    { id: 'all', name: 'Todos', icon: '🍽️' },
     { id: 'tortas', name: 'Tortas', icon: '🎂' },
     { id: 'panaderia', name: 'Panadería', icon: '🥖' },
     { id: 'sin-azucar', name: 'Sin Azúcar', icon: '🌿' },
     { id: 'ofertas', name: 'Ofertas', icon: '🏷️' }
   ])
 
-  const selectedCategory = ref('todas')
-  const searchQuery = ref('')
-
   // Getters
   const featuredProducts = computed(() => {
-    return products.value.filter(product => product.featured)
+    return products.value.filter(product => product.featured && product.active)
   })
 
   const filteredProducts = computed(() => {
-    let filtered = products.value
+    let filtered = products.value.filter(product => product.active)
 
     // Filter by category
-    if (selectedCategory.value !== 'todas') {
+    if (selectedCategory.value !== 'all') {
       filtered = filtered.filter(product => product.category === selectedCategory.value)
     }
 
     // Filter by search query
-    if (searchQuery.value.trim()) {
-      const query = searchQuery.value.toLowerCase().trim()
-      filtered = filtered.filter(product => 
+    if (searchQuery.value) {
+      const query = searchQuery.value.toLowerCase()
+      filtered = filtered.filter(product =>
         product.name.toLowerCase().includes(query) ||
         product.description.toLowerCase().includes(query)
       )
@@ -141,11 +54,112 @@ export const useProductsStore = defineStore('products', () => {
     return filtered
   })
 
-  const getProductById = computed(() => {
-    return (id) => products.value.find(product => product.id === id)
-  })
-
   // Actions
+  async function fetchProducts() {
+    try {
+      loading.value = true
+      error.value = null
+
+      const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'))
+      const querySnapshot = await getDocs(q)
+      
+      products.value = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+
+      return { success: true }
+    } catch (err) {
+      error.value = err.message
+      console.error('Error fetching products:', err)
+      return { success: false, error: err.message }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function addProduct(productData) {
+    try {
+      loading.value = true
+      error.value = null
+
+      const newProduct = {
+        ...productData,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        active: productData.active !== undefined ? productData.active : true
+      }
+
+      const docRef = await addDoc(collection(db, 'products'), newProduct)
+      
+      // Add to local state
+      products.value.unshift({
+        id: docRef.id,
+        ...newProduct
+      })
+
+      return { success: true, productId: docRef.id }
+    } catch (err) {
+      error.value = err.message
+      console.error('Error adding product:', err)
+      return { success: false, error: err.message }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function updateProduct(productId, productData) {
+    try {
+      loading.value = true
+      error.value = null
+
+      const updatedProduct = {
+        ...productData,
+        updatedAt: new Date()
+      }
+
+      await updateDoc(doc(db, 'products', productId), updatedProduct)
+      
+      // Update local state
+      const index = products.value.findIndex(p => p.id === productId)
+      if (index !== -1) {
+        products.value[index] = { id: productId, ...updatedProduct }
+      }
+
+      return { success: true }
+    } catch (err) {
+      error.value = err.message
+      console.error('Error updating product:', err)
+      return { success: false, error: err.message }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function deleteProduct(productId) {
+    try {
+      loading.value = true
+      error.value = null
+
+      await deleteDoc(doc(db, 'products', productId))
+      
+      // Remove from local state
+      const index = products.value.findIndex(p => p.id === productId)
+      if (index !== -1) {
+        products.value.splice(index, 1)
+      }
+
+      return { success: true }
+    } catch (err) {
+      error.value = err.message
+      console.error('Error deleting product:', err)
+      return { success: false, error: err.message }
+    } finally {
+      loading.value = false
+    }
+  }
+
+  // Utility functions
   function setCategory(categoryId) {
     selectedCategory.value = categoryId
   }
@@ -155,7 +169,7 @@ export const useProductsStore = defineStore('products', () => {
   }
 
   function clearFilters() {
-    selectedCategory.value = 'todas'
+    selectedCategory.value = 'all'
     searchQuery.value = ''
   }
 
@@ -166,20 +180,44 @@ export const useProductsStore = defineStore('products', () => {
     }).format(price)
   }
 
+  function getProductById(id) {
+    return products.value.find(product => product.id === id)
+  }
+
+  function getProductImageUrl(product, size = 'medium') {
+    if (product.imageUrl) {
+      return product.imageUrl
+    }
+    // Fallback to placeholder or category emoji
+    return null
+  }
+
+  function clearError() {
+    error.value = null
+  }
+
   return {
     // State
     products,
-    categories,
+    loading,
+    error,
     selectedCategory,
     searchQuery,
     // Getters
+    categories,
     featuredProducts,
     filteredProducts,
-    getProductById,
     // Actions
+    fetchProducts,
+    addProduct,
+    updateProduct,
+    deleteProduct,
     setCategory,
     setSearchQuery,
     clearFilters,
-    formatPrice
+    formatPrice,
+    getProductById,
+    getProductImageUrl,
+    clearError
   }
 })

@@ -61,11 +61,16 @@
 
     <!-- Products Grid -->
     <div v-if="filteredProducts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      <ProductCard
-        v-for="product in filteredProducts"
-        :key="product.id"
-        :product="product"
-      />
+      <template v-for="product in filteredProducts" :key="product.id">
+        <ConfigurableProductCard
+          v-if="product.productType === 'configurable'"
+          :product="product"
+        />
+        <ProductCard
+          v-else
+          :product="product"
+        />
+      </template>
     </div>
 
     <!-- Empty State -->
@@ -107,6 +112,8 @@
 import { computed } from 'vue'
 import { useProductsStore } from '@/stores/products'
 import ProductCard from './ProductCard.vue'
+import ConfigurableProductCard from './ConfigurableProductCard.vue'
+import LoadingSpinner from '@/components/ui/LoadingSpinner.vue'
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({

@@ -138,8 +138,13 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <!-- Image -->
           <div class="relative">
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center text-9xl">
-              👩‍🍳
+            <div class="aspect-square rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 overflow-hidden">
+              <img
+                src="https://raw.githubusercontent.com/maikostudios/assets_delicias_tia_jovy/main/assets/img/ceo/katy.jpg"
+                alt="Katy - Fundadora de Delicias Tía Jovy"
+                class="w-full h-full object-cover"
+                @error="handleChefImageError"
+              />
             </div>
             <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4">
               <div class="flex items-center space-x-2">
@@ -394,6 +399,12 @@ const handleImageError = (event) => {
   // Fallback to emoji display if image fails to load
   event.target.style.display = 'none'
   event.target.parentElement.innerHTML = '<div class="w-full h-full rounded-xl bg-white/20 flex items-center justify-center text-8xl animate-bounce-slow">🧁</div>'
+}
+
+const handleChefImageError = (event) => {
+  // Fallback to chef emoji if Katy's image fails to load
+  event.target.style.display = 'none'
+  event.target.parentElement.innerHTML = '<div class="w-full h-full rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center text-9xl">👩‍🍳</div>'
 }
 
 const handleBrandLogoError = (event) => {
