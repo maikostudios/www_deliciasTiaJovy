@@ -126,114 +126,118 @@ export const useOrdersStore = defineStore('orders', () => {
   function generateWhatsAppMessage(orderData) {
     const { customerInfo, items, comments, total } = orderData
 
-    let message = `🧁 *NUEVO PEDIDO - DELICIAS TÍA JOVY* 🧁\n\n`
-    message += `👤 *DATOS DEL CLIENTE:*\n`
+    let message = `🧁 NUEVO PEDIDO - DELICIAS TÍA JOVY 🧁\n\n`
+    message += `👤 DATOS DEL CLIENTE:\n`
     message += `• Nombre: ${customerInfo.name}\n`
     message += `• Email: ${customerInfo.email}\n`
-    message += `• Teléfono: ${customerInfo.phone}\n`
+    message += `• Teléfono: ${formatPhoneNumber(customerInfo.phone)}\n`
     if (customerInfo.rut) {
       message += `• RUT: ${customerInfo.rut}\n`
     }
     message += `\n`
 
-    message += `🛒 *DETALLE DEL PEDIDO:*\n`
+    message += `🛒 DETALLE DEL PEDIDO:\n`
     message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`
 
+    // Calcular precios separados
+    let subtotalProductos = 0
+    let subtotalExtras = 0
+
     items.forEach((item, index) => {
-      message += `\n📦 *PRODUCTO ${index + 1}:*\n`
-      message += `🧁 ${item.name}\n`
-      message += `📊 Cantidad: ${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}\n`
-      message += `💵 Precio unitario: $${item.price.toLocaleString()}\n`
-      message += `💰 Subtotal: $${(item.price * item.quantity).toLocaleString()}\n`
+      message += `\n📦 PRODUCTO ${index + 1}:\n`
 
-      // Si el producto tiene configuración (torta personalizada)
-      if (item.configuration) {
-        const config = item.configuration
-        message += `\n🎂 *CONFIGURACIÓN PERSONALIZADA:*\n`
+      // Calcular precio base del producto (sin extras)
+      let precioBase = item.price
+      let precioExtras = 0
 
-        // Tamaño
-        if (config.size) {
-          const sizeInfo = getSizeInfo(config.size)
-          message += `👥 Tamaño: ${config.size} personas (${sizeInfo})\n`
-        }
-
-        // Relleno principal (ahora es selección única)
-        if (config.filling) {
-          const fillingInfo = getFillingInfo(config.filling)
-          message += `🥧 Relleno seleccionado: ${fillingInfo.name} (${fillingInfo.category})\n`
-        }
-
-        // Compatibilidad con formato anterior (múltiples rellenos)
-        if (config.fillings && config.fillings.length > 0) {
-          message += `🥧 Rellenos seleccionados:\n`
-          config.fillings.forEach(filling => {
-            const fillingInfo = getFillingInfo(filling)
-            message += `   • ${fillingInfo.name} (${fillingInfo.category})\n`
-          })
-        }
-
-        // Extras y personalizaciones
-        if (config.extras && config.extras.length > 0) {
-          message += `✨ Extras y personalizaciones:\n`
-          config.extras.forEach(extra => {
-            const extraInfo = getExtraInfo(extra)
-            message += `   • ${extraInfo.name}`
-            if (extraInfo.price !== 'variable') {
-              message += ` (+$${extraInfo.price.toLocaleString()})`
-            } else {
-              message += ` (precio según diseño)`
-            }
-            message += `\n`
-          })
-        }
-
-        // Comentarios específicos del producto
-        if (config.specialInstructions) {
-          message += `📝 Instrucciones especiales: ${config.specialInstructions}\n`
-        }
+      if (item.configuration && item.configuration.extras) {
+        item.configuration.extras.forEach(extraId => {
+          const extraInfo = getExtraInfo(extraId)
+          if (typeof extraInfo.price === 'number') {
+            precioExtras += extraInfo.price
+          }
+        })
+        precioBase = item.price - precioExtras
       }
 
-      message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`
+      message += `🧁 ${item.name}\n`
+
+      // Mostrar relleno directamente después del nombre (si existe)
+      if (item.configuration && item.configuration.filling) {
+        const fillingInfo = getFillingInfo(item.configuration.filling)
+        message += `   Relleno : ${fillingInfo.name}\n`
+      }
+
+      message += `📊 Cantidad: ${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}\n`
+      message += `💵 Precio unitario PRODUCTO ${index + 1}: $${precioBase.toLocaleString()}\n`
+
+      // Mostrar extras si existen
+      if (item.configuration && item.configuration.extras && item.configuration.extras.length > 0) {
+        const extrasNames = item.configuration.extras.map(extraId => {
+          const extraInfo = getExtraInfo(extraId)
+          return extraInfo.name
+        }).join(', ')
+        message += `   Extras Opcionales: ${extrasNames}\n`
+        message += `   Precio unitario extras : $${precioExtras.toLocaleString()}\n`
+      }
+
+      message += `💰 \n`
+      message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`
+
+      // Acumular totales
+      subtotalProductos += precioBase * item.quantity
+      subtotalExtras += precioExtras * item.quantity
     })
 
-    message += `\n💰 *RESUMEN FINANCIERO:*\n`
+    message += `\n💰 RESUMEN FINANCIERO:\n`
     message += `• Subtotal productos: $${total.toLocaleString()}\n`
-    message += `• Delivery: Se coordina según ubicación\n`
-    message += `• *TOTAL PEDIDO: $${total.toLocaleString()}*\n\n`
+    message += `• Delivery: Se coordinará retiro o delivery con la pastelera\n`
+    message += `• TOTAL PEDIDO: $${total.toLocaleString()}\n\n`
 
     // Comentarios generales del pedido
     if (comments && comments.trim()) {
-      message += `💬 *COMENTARIOS ADICIONALES:*\n`
+      message += `💬 COMENTARIOS ADICIONALES:\n`
       message += `"${comments}"\n\n`
     }
 
     // Información de entrega y pago
-    message += `📋 *INFORMACIÓN IMPORTANTE:*\n`
+    message += `📋 INFORMACIÓN IMPORTANTE:\n`
     message += `• Pago: 50% anticipo + 50% contra entrega\n`
     message += `• Tiempo de preparación: Se coordina según producto\n`
     message += `• Delivery disponible en Nueva Imperial y alrededores\n`
     message += `• Para tortas: confirmar fecha de entrega con 48hrs de anticipación\n\n`
 
-    message += `📅 *Fecha del pedido:* ${new Date().toLocaleDateString('es-CL', {
+    message += `📅 Fecha del pedido: ${new Date().toLocaleDateString('es-CL', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     })}\n`
-    message += `⏰ *Hora:* ${new Date().toLocaleTimeString('es-CL', {
+    message += `⏰ Hora: ${new Date().toLocaleTimeString('es-CL', {
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
+      hour12: true
     })}\n\n`
 
-    message += `🎉 *¡Gracias por elegir Delicias Tía Jovy!*\n`
+    message += `🎉 ¡Gracias por elegir Delicias Tía Jovy!\n`
     message += `Te contactaremos pronto para confirmar detalles y coordinar la entrega. 💕\n\n`
-    message += `📱 WhatsApp: +56 9 4947 5207\n`
+    message += `📱 WhatsApp: ‪+56 9 4947 5207‬\n`
     message += `📍 Nueva Imperial, Región de La Araucanía`
 
     return encodeURIComponent(message)
   }
 
   // Funciones auxiliares para obtener información detallada
+  function formatPhoneNumber(phone) {
+    // Formatear teléfono como ‪+56 9 4947 5207‬
+    const cleaned = phone.replace(/\D/g, '')
+    if (cleaned.startsWith('56')) {
+      const number = cleaned.substring(2)
+      return `‪+56 ${number.substring(0, 1)} ${number.substring(1, 5)} ${number.substring(5)}‬`
+    }
+    return phone
+  }
+
   function getSizeInfo(size) {
     const sizeDescriptions = {
       10: 'Torta pequeña - ideal para reuniones íntimas',

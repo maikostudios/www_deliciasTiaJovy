@@ -29,19 +29,34 @@ export const useCartStore = defineStore('cart', () => {
 
   // Actions
   function addItem(product) {
-    const existingItem = items.value.find(item => item.id === product.id)
-    
-    if (existingItem) {
-      existingItem.quantity += 1
-    } else {
+    // Para productos configurables (tortas), cada configuración es única
+    // por lo que no debemos buscar items existentes, siempre agregar nuevo
+    if (product.configuration) {
       items.value.push({
         id: product.id,
         name: product.name,
         price: product.price,
         image: product.image,
         category: product.category,
-        quantity: 1
+        quantity: 1,
+        configuration: product.configuration // ✅ Preservar configuración
       })
+    } else {
+      // Para productos simples, buscar si ya existe y aumentar cantidad
+      const existingItem = items.value.find(item => item.id === product.id && !item.configuration)
+
+      if (existingItem) {
+        existingItem.quantity += 1
+      } else {
+        items.value.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          category: product.category,
+          quantity: 1
+        })
+      }
     }
   }
 
