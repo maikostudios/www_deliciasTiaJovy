@@ -342,5 +342,48 @@ module.exports = {
 }
 ```
 
+## 🚨 Problemas Técnicos Conocidos
+
+### 🔴 CRÍTICO - CartDrawer Modal Positioning
+**Descripción**: El modal del carrito no se posiciona correctamente
+**Síntomas**:
+- Modal aparece en posición fija cerca del footer
+- No se centra en la pantalla como debería
+- Overlay oscuro funciona correctamente
+- Problema presente en móvil Y desktop
+
+**Código Problemático**:
+```vue
+<!-- CartDrawer.vue - Estructura actual -->
+<div
+  v-if="cartStore.isDrawerOpen"
+  class="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4"
+  @click="cartStore.closeDrawer()"
+>
+  <div
+    class="bg-white rounded-t-2xl sm:rounded-2xl shadow-xl w-full sm:w-auto sm:min-w-[28rem] sm:max-w-[32rem] max-h-[95vh] sm:max-h-[90vh] overflow-y-auto flex flex-col"
+    @click.stop
+    style="padding-bottom: env(safe-area-inset-bottom);"
+  >
+```
+
+**Comparación con OrderModal (Funciona)**:
+```vue
+<!-- OrderModal.vue - Estructura que SÍ funciona -->
+<div
+  v-if="ordersStore.isOrderModalOpen"
+  class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+  @click="handleOverlayClick"
+>
+```
+
+**Posibles Causas**:
+- Conflicto de z-index con otros elementos
+- CSS del fondo SVG interfiriendo
+- Problema con el store de estado del carrito
+- Conflicto con estilos globales de TailwindCSS
+
+**Estado**: Sin resolver - Requiere investigación profunda
+
 ---
-**Última actualización**: 21 de Junio, 2025 - 7:30 AM
+**Última actualización**: 21 de Junio, 2025 - 7:35 AM

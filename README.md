@@ -105,10 +105,11 @@ VITE_FIREBASE_APP_ID=
 ### 🔴 CRÍTICO - Modal del Carrito
 **Problema**: El modal del carrito sigue apareciendo en posición incorrecta
 - **Ubicación**: Aparece arriba del footer, debajo de "Entrega a domicilio"
-- **Esperado**: Modal centrado con overlay
+- **Plataformas afectadas**: ❌ Móvil Y ❌ Desktop (confirmado en ambas versiones)
+- **Esperado**: Modal centrado con overlay oscuro
 - **Última modificación**: 21/06/2025 7:30 AM
-- **Estado**: Requiere investigación adicional
-- **Detalles**: A pesar de implementar la estructura de modal centrado, el carrito no se posiciona correctamente
+- **Estado**: Requiere investigación adicional - problema persiste en todas las plataformas
+- **Detalles**: A pesar de implementar la estructura de modal centrado similar al OrderModal, el carrito no se posiciona correctamente en ninguna versión
 
 ### 🟡 Menores
 - Optimización de carga de imágenes desde GitHub
@@ -175,14 +176,22 @@ https://deliciastiajovy.cl
 
 ## 📊 Últimos Commits
 
-### Commit más reciente: `874c3df`
+### Commit más reciente: `fa2b8a5`
+**Fecha**: 21/06/2025 7:30 AM
+**Mensaje**: "📚 Docs: Crear documentación completa del proyecto"
+**Cambios**:
+- Documentación técnica completa
+- README actualizado con stack tecnológico
+- Problema del carrito documentado
+
+### Commit anterior: `874c3df`
 **Fecha**: 21/06/2025 7:30 AM
 **Mensaje**: "🔧 Fix: Convertir CartDrawer de sidebar a modal centrado"
 **Cambios**:
 - Transformación de drawer lateral a modal
 - Mejoras responsive
 - Corrección de z-index y overlay
-- **Estado**: ❌ Problema persiste
+- **Estado**: ❌ Problema persiste en móvil Y desktop
 
 ### Commits Anteriores
 - `c72c53f`: Agregar carpeta public completa con imágenes
