@@ -19,7 +19,7 @@
                 Ver Productos 🧁
               </RouterLink>
               <button
-                @click="openDirectLink"
+                @click="scrollToLocationSection"
                 class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg"
               >
                 📍 Visítanos en Nueva Imperial
@@ -411,6 +411,16 @@ const handleBrandLogoError = (event) => {
   // Fallback for brand logo
   event.target.style.display = 'none'
   event.target.parentElement.innerHTML = '<div class="w-full h-48 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-6xl text-white">🧁</div>'
+}
+
+const scrollToLocationSection = () => {
+  const locationSection = document.getElementById('ubicacion')
+  if (locationSection) {
+    locationSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }
 }
 
 const scrollToBrandSection = () => {
