@@ -2,18 +2,18 @@
   <div id="app" class="min-h-screen bg-custom-pattern">
     <!-- Navbar -->
     <Navbar />
-    
+
     <!-- Main Content -->
     <main>
       <RouterView />
     </main>
-    
-    <!-- Cart Drawer -->
-    <CartDrawer />
-    
+
+    <!-- Cart Modal -->
+    <CartModal />
+
     <!-- Order Modal -->
     <OrderModal />
-    
+
     <!-- Footer -->
     <Footer />
 
@@ -26,7 +26,7 @@
 import { RouterView } from 'vue-router'
 import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
-import CartDrawer from './components/cart/CartDrawer.vue'
+import CartModal from './components/cart/CartModal.vue'
 import OrderModal from './components/order/OrderModal.vue'
 import Toast from './components/ui/Toast.vue'
 </script>
@@ -64,7 +64,7 @@ import Toast from './components/ui/Toast.vue'
 }
 
 /* Asegurar que el contenido esté por encima del overlay */
-.bg-custom-pattern > * {
+.bg-custom-pattern>* {
   position: relative;
   z-index: 1;
 }
