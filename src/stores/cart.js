@@ -5,6 +5,8 @@ export const useCartStore = defineStore("cart", () => {
   // State - Load from localStorage
   const items = ref(JSON.parse(localStorage.getItem("cart-items") || "[]"));
   const isModalOpen = ref(false);
+  const showNotification = ref(false);
+  const lastAddedProduct = ref(null);
 
   // Watch for changes and persist to localStorage
   watch(
@@ -67,6 +69,15 @@ export const useCartStore = defineStore("cart", () => {
         });
       }
     }
+
+    // Trigger notification
+    lastAddedProduct.value = product.name;
+    showNotification.value = true;
+
+    // Auto-hide notification after 3 seconds
+    setTimeout(() => {
+      showNotification.value = false;
+    }, 3000);
   }
 
   function removeItem(productId) {
@@ -107,6 +118,8 @@ export const useCartStore = defineStore("cart", () => {
     // State
     items,
     isModalOpen,
+    showNotification,
+    lastAddedProduct,
     // Getters
     itemCount,
     totalPrice,

@@ -1,19 +1,5 @@
 <template>
   <div class="min-h-screen">
-    <!-- Header -->
-    <section class="bg-transparent-white border-b border-gray-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center">
-          <h1 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">
-            Nuestra Tienda
-          </h1>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Explora todos nuestros productos caseros. Desde tortas personalizadas hasta pan fresco del día.
-          </p>
-        </div>
-      </div>
-    </section>
-
     <!-- Promotional Banner -->
     <PromoBanner />
 
@@ -26,23 +12,8 @@
       </div>
     </section>
 
-    <!-- Floating Cart Button (Mobile) -->
-    <teleport to="body">
-      <div ref="floatingButton" class="fixed right-6 z-[9999] md:hidden transition-all duration-300"
-        :class="buttonPosition">
-        <button @click="cartStore.toggleModal()"
-          class="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center relative"
-          :aria-label="`Abrir carrito con ${cartStore.itemCount} productos`"
-          :title="`Carrito (${cartStore.itemCount} productos)`">
-          <ShoppingCartIcon class="h-6 w-6" aria-hidden="true" />
-          <span v-if="cartStore.itemCount > 0"
-            class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-semibold"
-            :aria-label="`${cartStore.itemCount} productos en el carrito`">
-            {{ cartStore.itemCount }}
-          </span>
-        </button>
-      </div>
-    </teleport>
+    <!-- Floating Cart Button & Notification -->
+    <FloatingCartButton />
 
     <!-- Info Banner -->
     <section class="bg-primary text-white py-8">
@@ -70,57 +41,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { useCartStore } from '@/stores/cart'
+import { ref, onMounted } from 'vue'
 import { useProductsStore } from '@/stores/products'
 import ProductGrid from '@/components/products/ProductGrid.vue'
 import PromoBanner from '@/components/layout/PromoBanner.vue'
-import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
+import FloatingCartButton from '@/components/cart/FloatingCartButton.vue'
 
-const cartStore = useCartStore()
 const productsStore = useProductsStore()
 const loading = ref(false)
-const floatingButton = ref(null)
-const isNearFooter = ref(false)
-
-// Computed property for button position
-const buttonPosition = computed(() => {
-  return isNearFooter.value ? 'bottom-32' : 'bottom-6'
-})
-
-// Function to check if user is near footer
-const checkFooterPosition = () => {
-  const footer = document.querySelector('footer')
-  if (!footer) return
-
-  const footerRect = footer.getBoundingClientRect()
-  const windowHeight = window.innerHeight
-
-  // If footer is visible (top of footer is within viewport + 50px buffer)
-  isNearFooter.value = footerRect.top <= windowHeight + 50
-}
-
-// Throttle function for performance
-const throttle = (func, delay) => {
-  let timeoutId
-  let lastExecTime = 0
-  return function (...args) {
-    const currentTime = Date.now()
-
-    if (currentTime - lastExecTime > delay) {
-      func.apply(this, args)
-      lastExecTime = currentTime
-    } else {
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        func.apply(this, args)
-        lastExecTime = Date.now()
-      }, delay - (currentTime - lastExecTime))
-    }
-  }
-}
-
-const throttledCheckFooter = throttle(checkFooterPosition, 100)
 
 onMounted(async () => {
   // Load products from Firebase
@@ -132,17 +60,5 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
-
-  // Setup scroll listener for footer detection
-  window.addEventListener('scroll', throttledCheckFooter)
-  window.addEventListener('resize', throttledCheckFooter)
-
-  // Initial check
-  checkFooterPosition()
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', throttledCheckFooter)
-  window.removeEventListener('resize', throttledCheckFooter)
 })
 </script>

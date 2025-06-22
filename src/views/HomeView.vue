@@ -11,24 +11,19 @@
               Endulzamos tu día
             </h1>
             <p class="text-xl sm:text-2xl text-white/90 leading-relaxed">
-              Pastelería y mini market familiar en Nueva Imperial. 
+              Pastelería y mini market familiar en Nueva Imperial.
               Productos caseros hechos con amor y los mejores ingredientes.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <RouterLink to="/tienda" class="btn-accent text-lg px-8 py-4">
                 Ver Productos 🧁
               </RouterLink>
-              <button
-                @click="scrollToLocationSection"
-                class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg"
-              >
+              <button @click="scrollToLocationSection"
+                class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg">
                 📍 Visítanos en Nueva Imperial
               </button>
-              <a
-                href="https://wa.me/56949475207"
-                target="_blank"
-                class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg"
-              >
+              <a href="https://wa.me/56949475207" target="_blank"
+                class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg">
                 Contactar 📱
               </a>
             </div>
@@ -37,12 +32,8 @@
           <!-- Hero Image -->
           <div class="relative">
             <div class="aspect-square rounded-2xl bg-white/10 backdrop-blur-sm p-4 mx-auto max-w-md overflow-hidden">
-              <img
-                src="/images/logos/flayer1.jpg"
-                alt="Productos Delicias Tía Jovy"
-                class="w-full h-full object-cover rounded-xl shadow-2xl"
-                @error="handleImageError"
-              />
+              <img src="/images/logos/flayer1.jpg" alt="Productos Delicias Tía Jovy"
+                class="w-full h-full object-cover rounded-xl shadow-2xl" @error="handleImageError" />
             </div>
             <!-- Floating elements -->
             <div class="absolute top-4 right-4 text-4xl animate-pulse-slow">🎂</div>
@@ -61,12 +52,8 @@
           <div class="text-center">
             <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 lg:p-12 h-full">
               <div class="max-w-md mx-auto mb-6">
-                <img
-                  src="/images/logos/logo1_fondo_w.jpg"
-                  alt="Delicias Tía Jovy - Logo Oficial"
-                  class="w-full h-auto rounded-xl shadow-lg"
-                  @error="handleBrandLogoError"
-                />
+                <img src="/images/logos/logo1_fondo_w.jpg" alt="Delicias Tía Jovy - Logo Oficial"
+                  class="w-full h-auto rounded-xl shadow-lg" @error="handleBrandLogoError" />
               </div>
               <h2 class="text-2xl sm:text-3xl font-display font-bold text-gray-900 mb-4">
                 Tradición Familiar desde 2008
@@ -93,10 +80,8 @@
               <!-- Navigation Buttons -->
               <div class="space-y-4">
                 <!-- Botón Principal -->
-                <button
-                  @click="openDirectLink"
-                  class="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
-                >
+                <button @click="openDirectLink"
+                  class="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
                   <span class="text-2xl">🎯</span>
                   <div class="text-left">
                     <div class="text-lg">¡Navegar Ahora!</div>
@@ -108,19 +93,15 @@
                 <p class="text-sm text-gray-500 text-center">O elige tu app favorita:</p>
                 <div class="grid grid-cols-2 gap-3">
                   <!-- Apple Maps -->
-                  <button
-                    @click="openAppleMaps"
-                    class="flex items-center justify-center space-x-2 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                  >
+                  <button @click="openAppleMaps"
+                    class="flex items-center justify-center space-x-2 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                     <span class="text-lg">🍎</span>
                     <span class="text-sm">Apple Maps</span>
                   </button>
 
                   <!-- Waze -->
-                  <button
-                    @click="openWaze"
-                    class="flex items-center justify-center space-x-2 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                  >
+                  <button @click="openWaze"
+                    class="flex items-center justify-center space-x-2 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                     <span class="text-lg">🚗</span>
                     <span class="text-sm">Waze</span>
                   </button>
@@ -141,10 +122,8 @@
             <div class="aspect-square rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 overflow-hidden">
               <img
                 src="https://raw.githubusercontent.com/maikostudios/assets_delicias_tia_jovy/main/assets/img/ceo/katy.jpg"
-                alt="Katy - Fundadora de Delicias Tía Jovy"
-                class="w-full h-full object-cover"
-                @error="handleChefImageError"
-              />
+                alt="Katy - Fundadora de Delicias Tía Jovy" class="w-full h-full object-cover"
+                @error="handleChefImageError" />
             </div>
             <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4">
               <div class="flex items-center space-x-2">
@@ -165,18 +144,18 @@
               </h2>
               <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
             </div>
-            
+
             <div class="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                Con más de 15 años de experiencia en la repostería, la Tía Jovy ha convertido su pasión 
+                Con más de 15 años de experiencia en la repostería, la Tía Jovy ha convertido su pasión
                 por la cocina en un negocio familiar que endulza los días de Nueva Imperial.
               </p>
               <p>
-                Cada producto es elaborado artesanalmente con ingredientes frescos y de calidad, 
+                Cada producto es elaborado artesanalmente con ingredientes frescos y de calidad,
                 manteniendo las recetas tradicionales que han pasado de generación en generación.
               </p>
               <p>
-                Desde tortas personalizadas hasta pan amasado recién horneado, en Delicias Tía Jovy 
+                Desde tortas personalizadas hasta pan amasado recién horneado, en Delicias Tía Jovy
                 encontrarás el sabor casero que tanto extrañas.
               </p>
             </div>
@@ -205,17 +184,31 @@
           <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">
             Productos Destacados
           </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
             Descubre nuestros productos más populares, hechos con amor y los mejores ingredientes
           </p>
+
+          <!-- Value Proposition for Configurable Cakes -->
+          <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 max-w-4xl mx-auto shadow-lg">
+            <div class="flex items-center justify-center space-x-3 mb-3">
+              <span class="text-3xl">🎨</span>
+              <h3 class="text-xl font-semibold text-white">¡Personaliza tu Torta!</h3>
+              <span class="text-3xl">🎂</span>
+            </div>
+            <p class="text-white leading-relaxed">
+              Nuestro <strong class="text-yellow-200">valor agregado especial</strong>: Tortas completamente
+              personalizables.
+              Elige el tamaño, sabor y extras. ¡Cada torta es única como tú!
+            </p>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-          <ProductCard
-            v-for="product in featuredProducts"
-            :key="product.id"
-            :product="product"
-          />
+          <template v-for="product in featuredProducts" :key="product.id">
+            <ConfigurableProductCard v-if="product.productType === 'configurable' || product.customizable === true"
+              :product="product" />
+            <ProductCard v-else :product="product" />
+          </template>
         </div>
 
         <div class="text-center">
@@ -233,18 +226,15 @@
           ¿Listo para hacer tu pedido?
         </h2>
         <p class="text-xl text-white/90 mb-8 leading-relaxed">
-          Selecciona tus productos favoritos y recíbelos frescos. 
+          Selecciona tus productos favoritos y recíbelos frescos.
           ¡Hacemos entregas en Nueva Imperial!
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <RouterLink to="/tienda" class="btn-accent text-lg px-8 py-4">
             Hacer Pedido 🛒
           </RouterLink>
-          <a
-            href="https://wa.me/56949475207"
-            target="_blank"
-            class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-secondary transition-all duration-200 rounded-lg font-semibold text-lg"
-          >
+          <a href="https://wa.me/56949475207" target="_blank"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-secondary transition-all duration-200 rounded-lg font-semibold text-lg">
             WhatsApp 📱
           </a>
         </div>
@@ -260,7 +250,8 @@
             📍 Visítanos en Nueva Imperial
           </h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Te esperamos en nuestro acogedor local. ¡Ven a disfrutar de nuestros productos frescos y el ambiente familiar!
+            Te esperamos en nuestro acogedor local. ¡Ven a disfrutar de nuestros productos frescos y el ambiente
+            familiar!
           </p>
         </div>
 
@@ -278,14 +269,8 @@
               <div class="relative">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d778.0568762835115!2d-72.9446152303245!3d-38.735541252116285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9615332b7fd5dbb5%3A0x372d246e72746039!2sDelicias%20T%C3%ADa%20Jovy%20Minimarket%20Reposter%C3%ADa%20Panader%C3%ADa%20y%20Gastronomia!5e0!3m2!1ses-419!2scl!4v1750462637699!5m2!1ses-419!2scl"
-                  width="100%"
-                  height="400"
-                  style="border:0;"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  class="w-full"
-                ></iframe>
+                  width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade" class="w-full"></iframe>
 
                 <!-- Map Overlay for Mobile -->
                 <div class="absolute inset-0 bg-black/0 pointer-events-none lg:hidden"></div>
@@ -343,10 +328,8 @@
 
               <!-- Botón Principal -->
               <div class="mb-6">
-                <button
-                  @click="openDirectLink"
-                  class="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
-                >
+                <button @click="openDirectLink"
+                  class="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
                   <span class="text-2xl">🎯</span>
                   <div class="text-left">
                     <div class="text-lg">¡Navegar Ahora!</div>
@@ -359,19 +342,15 @@
               <p class="text-sm text-gray-500 mb-4 text-center">O elige tu app favorita:</p>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Apple Maps -->
-                <button
-                  @click="openAppleMaps"
-                  class="flex items-center justify-center space-x-3 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                >
+                <button @click="openAppleMaps"
+                  class="flex items-center justify-center space-x-3 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                   <span class="text-xl">🍎</span>
                   <span>Apple Maps</span>
                 </button>
 
                 <!-- Waze -->
-                <button
-                  @click="openWaze"
-                  class="flex items-center justify-center space-x-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                >
+                <button @click="openWaze"
+                  class="flex items-center justify-center space-x-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                   <span class="text-xl">🚗</span>
                   <span>Waze</span>
                 </button>
@@ -382,6 +361,9 @@
       </div>
     </section>
 
+    <!-- Floating Cart Button & Notification -->
+    <FloatingCartButton />
+
   </div>
 </template>
 
@@ -390,6 +372,8 @@ import { computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useProductsStore } from '@/stores/products'
 import ProductCard from '@/components/products/ProductCard.vue'
+import ConfigurableProductCard from '@/components/products/ConfigurableProductCard.vue'
+import FloatingCartButton from '@/components/cart/FloatingCartButton.vue'
 
 const productsStore = useProductsStore()
 
