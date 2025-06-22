@@ -27,20 +27,22 @@
     </section>
 
     <!-- Floating Cart Button (Mobile) -->
-    <div class="fixed bottom-6 right-6 z-40 md:hidden">
-      <button
-        @click="cartStore.toggleDrawer()"
-        class="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center relative"
-      >
-        <ShoppingCartIcon class="h-6 w-6" />
-        <span
-          v-if="cartStore.itemCount > 0"
-          class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-semibold"
-        >
-          {{ cartStore.itemCount }}
-        </span>
-      </button>
-    </div>
+    <teleport to="body">
+      <div ref="floatingButton" class="fixed right-6 z-[9999] md:hidden transition-all duration-300"
+        :class="buttonPosition">
+        <button @click="cartStore.toggleModal()"
+          class="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center relative"
+          :aria-label="`Abrir carrito con ${cartStore.itemCount} productos`"
+          :title="`Carrito (${cartStore.itemCount} productos)`">
+          <ShoppingCartIcon class="h-6 w-6" aria-hidden="true" />
+          <span v-if="cartStore.itemCount > 0"
+            class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-semibold"
+            :aria-label="`${cartStore.itemCount} productos en el carrito`">
+            {{ cartStore.itemCount }}
+          </span>
+        </button>
+      </div>
+    </teleport>
 
     <!-- Info Banner -->
     <section class="bg-primary text-white py-8">
@@ -68,7 +70,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import { useProductsStore } from '@/stores/products'
 import ProductGrid from '@/components/products/ProductGrid.vue'
@@ -78,6 +80,47 @@ import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
 const cartStore = useCartStore()
 const productsStore = useProductsStore()
 const loading = ref(false)
+const floatingButton = ref(null)
+const isNearFooter = ref(false)
+
+// Computed property for button position
+const buttonPosition = computed(() => {
+  return isNearFooter.value ? 'bottom-32' : 'bottom-6'
+})
+
+// Function to check if user is near footer
+const checkFooterPosition = () => {
+  const footer = document.querySelector('footer')
+  if (!footer) return
+
+  const footerRect = footer.getBoundingClientRect()
+  const windowHeight = window.innerHeight
+
+  // If footer is visible (top of footer is within viewport + 50px buffer)
+  isNearFooter.value = footerRect.top <= windowHeight + 50
+}
+
+// Throttle function for performance
+const throttle = (func, delay) => {
+  let timeoutId
+  let lastExecTime = 0
+  return function (...args) {
+    const currentTime = Date.now()
+
+    if (currentTime - lastExecTime > delay) {
+      func.apply(this, args)
+      lastExecTime = currentTime
+    } else {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        func.apply(this, args)
+        lastExecTime = Date.now()
+      }, delay - (currentTime - lastExecTime))
+    }
+  }
+}
+
+const throttledCheckFooter = throttle(checkFooterPosition, 100)
 
 onMounted(async () => {
   // Load products from Firebase
@@ -89,5 +132,17 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
+
+  // Setup scroll listener for footer detection
+  window.addEventListener('scroll', throttledCheckFooter)
+  window.addEventListener('resize', throttledCheckFooter)
+
+  // Initial check
+  checkFooterPosition()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', throttledCheckFooter)
+  window.removeEventListener('resize', throttledCheckFooter)
 })
 </script>
