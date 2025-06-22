@@ -1,30 +1,25 @@
 <template>
-  <div class="configurable-product-card p-4 group">
+  <div
+    class="configurable-product-card bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-4 group">
     <!-- Product Image -->
     <div class="relative mb-4 overflow-hidden rounded-lg bg-gray-100">
       <div class="aspect-square w-full">
-        <img
-          v-if="productImageUrl && !imageError"
-          :src="productImageUrl"
-          :alt="product.name"
+        <img v-if="productImageUrl && !imageError" :src="productImageUrl" :alt="product.name"
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          @error="handleImageError"
-        />
-        <div
-          v-else
-          class="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-primary/10 to-secondary/10"
-        >
+          @error="handleImageError" />
+        <div v-else
+          class="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-primary/10 to-secondary/10">
           🎂
         </div>
       </div>
-      
+
       <!-- Category Badge -->
       <div class="absolute top-2 left-2">
         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-700">
           🎂 Torta Configurable
         </span>
       </div>
-      
+
       <!-- Featured Badge -->
       <div v-if="product.featured" class="absolute top-2 right-2">
         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-500 text-white">
@@ -37,19 +32,19 @@
     <div class="space-y-3">
       <h3 class="font-semibold text-gray-900 text-lg leading-tight">{{ product.name }}</h3>
       <p class="text-gray-600 text-sm line-clamp-2">{{ product.description }}</p>
-      
+
       <!-- Price Range -->
       <div class="flex items-center space-x-2">
         <span class="text-lg font-bold text-primary">Desde {{ formatPrice(minPrice) }}</span>
         <span class="text-sm text-gray-500">hasta {{ formatPrice(maxPrice) }}</span>
       </div>
-      
+
       <!-- Available Sizes -->
       <div class="text-sm text-gray-600">
         <span class="font-medium">Tamaños:</span>
         {{ availableSizesText }}
       </div>
-      
+
       <!-- Available Fillings Count -->
       <div class="text-sm text-gray-600">
         <span class="font-medium">Rellenos:</span>
@@ -58,10 +53,8 @@
     </div>
 
     <!-- Configure Button -->
-    <button
-      @click="openConfigModal"
-      class="w-full mt-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-    >
+    <button @click="openConfigModal"
+      class="w-full mt-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
       <span class="flex items-center justify-center space-x-2">
         <span class="text-lg">🎨</span>
         <span>Personalizar Torta</span>
@@ -72,23 +65,18 @@
     <div v-if="showModal" class="fixed inset-0 z-50 overflow-y-auto">
       <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <!-- Background overlay -->
-        <div 
-          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-          @click="closeModal"
-        ></div>
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click="closeModal"></div>
 
         <!-- Modal panel -->
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
           <!-- Modal Header -->
           <div class="bg-gradient-to-r from-primary to-secondary px-6 py-4">
             <div class="flex items-center justify-between">
               <h3 class="text-lg font-medium text-white">
                 🎂 Personalizar {{ product.name }}
               </h3>
-              <button
-                @click="closeModal"
-                class="text-white hover:text-gray-200 transition-colors"
-              >
+              <button @click="closeModal" class="text-white hover:text-gray-200 transition-colors">
                 <span class="text-2xl">×</span>
               </button>
             </div>
@@ -100,28 +88,15 @@
             <div class="mb-6">
               <h4 class="font-medium text-gray-900 mb-3">📏 Selecciona el tamaño:</h4>
               <div class="grid grid-cols-2 gap-3">
-                <div 
-                  v-for="size in availableSizes" 
-                  :key="size.people"
-                  class="relative"
-                >
-                  <input
-                    :id="`modal-size-${size.people}`"
-                    v-model="selectedSize"
-                    :value="size.people"
-                    type="radio"
-                    name="size"
-                    class="sr-only"
-                  />
-                  <label
-                    :for="`modal-size-${size.people}`"
-                    :class="[
-                      'block p-3 border-2 rounded-lg cursor-pointer transition-all duration-200 text-center',
-                      selectedSize === size.people
-                        ? 'border-primary bg-primary/5 shadow-md'
-                        : 'border-gray-200 hover:border-gray-300'
-                    ]"
-                  >
+                <div v-for="size in availableSizes" :key="size.people" class="relative">
+                  <input :id="`modal-size-${size.people}`" v-model="selectedSize" :value="size.people" type="radio"
+                    name="size" class="sr-only" />
+                  <label :for="`modal-size-${size.people}`" :class="[
+                    'block p-3 border-2 rounded-lg cursor-pointer transition-all duration-200 text-center',
+                    selectedSize === size.people
+                      ? 'border-primary bg-primary/5 shadow-md'
+                      : 'border-gray-200 hover:border-gray-300'
+                  ]">
                     <div class="font-semibold text-gray-900">{{ size.people }} personas</div>
                     <div class="text-sm text-primary font-medium">{{ formatPrice(size.price) }}</div>
                   </label>
@@ -133,7 +108,7 @@
             <div class="mb-6">
               <h4 class="font-medium text-gray-900 mb-3">🥧 Selecciona los rellenos:</h4>
               <p class="text-sm text-gray-600 mb-3">Puedes combinar como quieras</p>
-              
+
               <div class="space-y-4">
                 <div v-for="category in fillingCategories" :key="category.id">
                   <h5 class="font-medium text-gray-800 mb-2 flex items-center">
@@ -141,19 +116,11 @@
                     {{ category.name }}
                   </h5>
                   <div class="grid grid-cols-1 gap-2">
-                    <label
-                      v-for="filling in getFillingsByCategory(category.id)"
-                      :key="filling.id"
+                    <label v-for="filling in getFillingsByCategory(category.id)" :key="filling.id"
                       class="flex items-center space-x-2 p-2 border rounded-lg hover:bg-gray-50 cursor-pointer"
-                      :class="{ 'border-primary bg-primary/5': selectedFilling === filling.id }"
-                    >
-                      <input
-                        v-model="selectedFilling"
-                        :value="filling.id"
-                        type="radio"
-                        name="cake-filling"
-                        class="text-primary border-gray-300 focus:ring-primary"
-                      />
+                      :class="{ 'border-primary bg-primary/5': selectedFilling === filling.id }">
+                      <input v-model="selectedFilling" :value="filling.id" type="radio" name="cake-filling"
+                        class="text-primary border-gray-300 focus:ring-primary" />
                       <span class="text-sm text-gray-700">{{ filling.name }}</span>
                     </label>
                   </div>
@@ -165,18 +132,11 @@
             <div v-if="availableExtras.length > 0" class="mb-6">
               <h4 class="font-medium text-gray-900 mb-3">✨ Extras opcionales:</h4>
               <div class="space-y-2">
-                <label 
-                  v-for="extra in availableExtras" 
-                  :key="extra.id"
-                  class="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"
-                >
+                <label v-for="extra in availableExtras" :key="extra.id"
+                  class="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
                   <div class="flex items-center space-x-3">
-                    <input
-                      v-model="selectedExtras"
-                      :value="extra.id"
-                      type="checkbox"
-                      class="text-primary border-gray-300 rounded focus:ring-primary"
-                    />
+                    <input v-model="selectedExtras" :value="extra.id" type="checkbox"
+                      class="text-primary border-gray-300 rounded focus:ring-primary" />
                     <div>
                       <div class="text-sm font-medium text-gray-900">{{ extra.name }}</div>
                       <div class="text-xs text-gray-600">{{ extra.description }}</div>
@@ -200,7 +160,8 @@
                 </div>
                 <div class="text-sm text-blue-800">
                   <p class="font-medium mb-1">¿Necesitas algo más?</p>
-                  <p>Si necesitas algún extra adicional que no está en el formulario, no te preocupes. Cuando realices el pedido tendrás un espacio para agregar más comentarios y especificaciones.</p>
+                  <p>Si necesitas algún extra adicional que no está en el formulario, no te preocupes. Cuando realices
+                    el pedido tendrás un espacio para agregar más comentarios y especificaciones.</p>
                 </div>
               </div>
 
@@ -211,7 +172,8 @@
                 </div>
                 <div class="text-sm text-purple-800">
                   <p class="font-medium mb-1">Coordinación de entrega</p>
-                  <p>La fecha de entrega del producto se coordinará directamente con la pastelera cuando completes el pedido en el carrito de compras.</p>
+                  <p>La fecha de entrega del producto se coordinará directamente con la pastelera cuando completes el
+                    pedido en el carrito de compras.</p>
                 </div>
               </div>
 
@@ -239,17 +201,12 @@
                 Total: {{ formatPrice(totalPrice) }}
               </div>
               <div class="flex space-x-3">
-                <button
-                  @click="closeModal"
-                  class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-                >
+                <button @click="closeModal"
+                  class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                   Cancelar
                 </button>
-                <button
-                  @click="addToCart"
-                  :disabled="!canAddToCart"
-                  class="px-6 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:from-primary/90 hover:to-secondary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <button @click="addToCart" :disabled="!canAddToCart"
+                  class="px-6 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:from-primary/90 hover:to-secondary/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
                   🛒 Agregar al Carrito
                 </button>
               </div>
@@ -344,13 +301,13 @@ const fillingCategories = computed(() => [
 
 const totalPrice = computed(() => {
   let total = 0
-  
+
   // Base price from selected size
   if (selectedSize.value) {
     const size = availableSizes.value.find(s => s.people === selectedSize.value)
     total += size ? size.price : 0
   }
-  
+
   // Add extras with fixed prices
   selectedExtras.value.forEach(extraId => {
     const extra = availableExtras.value.find(e => e.id === extraId)
@@ -358,7 +315,7 @@ const totalPrice = computed(() => {
       total += extra.price
     }
   })
-  
+
   return total
 })
 
@@ -387,7 +344,7 @@ const closeModal = () => {
 
 const addToCart = () => {
   if (!canAddToCart.value) return
-  
+
   // Create configured product for cart
   const configuredProduct = {
     ...props.product,
@@ -400,7 +357,7 @@ const addToCart = () => {
       extras: selectedExtras.value
     }
   }
-  
+
   cartStore.addItem(configuredProduct)
   closeModal()
 }

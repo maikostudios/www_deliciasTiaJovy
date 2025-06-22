@@ -5,12 +5,8 @@
         <!-- Promotional Image -->
         <div class="order-2 lg:order-1">
           <div class="relative rounded-xl overflow-hidden shadow-2xl">
-            <img 
-              src="/images/logos/flayer1.jpg" 
-              alt="Promociones Delicias Tía Jovy" 
-              class="w-full h-64 lg:h-80 object-cover"
-              @error="handleImageError"
-            />
+            <img src="/images/logos/flayer1.jpg" alt="Promociones Delicias Tía Jovy"
+              class="w-full h-64 lg:h-80 object-cover" @error="handleImageError" />
             <div class="absolute inset-0 bg-black/20"></div>
             <div class="absolute bottom-4 left-4 right-4">
               <div class="bg-white/90 backdrop-blur-sm rounded-lg p-3">
@@ -24,14 +20,23 @@
 
         <!-- Promotional Content -->
         <div class="order-1 lg:order-2 text-center lg:text-left">
-          <h2 class="text-3xl lg:text-4xl font-display font-bold mb-4">
+          <div class="mb-6">
+            <h1 class="text-4xl lg:text-5xl font-display font-bold mb-3">
+              Nuestra Tienda
+            </h1>
+            <p class="text-lg text-white/95 mb-4 leading-relaxed">
+              Explora todos nuestros productos caseros. Desde tortas personalizadas hasta pan fresco del día.
+            </p>
+          </div>
+
+          <h2 class="text-2xl lg:text-3xl font-display font-bold mb-4 text-yellow-200">
             ¡Ofertas Especiales!
           </h2>
-          <p class="text-xl text-white/90 mb-6 leading-relaxed">
-            Descubre nuestras promociones semanales y productos destacados. 
+          <p class="text-lg text-white/90 mb-6 leading-relaxed">
+            Descubre nuestras promociones semanales y productos destacados.
             Calidad artesanal al mejor precio.
           </p>
-          
+
           <div class="space-y-3 mb-6">
             <div class="flex items-center justify-center lg:justify-start space-x-3">
               <span class="text-2xl">🎂</span>
@@ -48,17 +53,12 @@
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button
-              @click="scrollToProducts"
-              class="bg-white text-primary hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
+            <button @click="scrollToProducts"
+              class="bg-white text-primary hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
               Ver Productos 🛒
             </button>
-            <a
-              href="https://wa.me/56949475207"
-              target="_blank"
-              class="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold py-3 px-6 rounded-lg transition-all duration-200"
-            >
+            <a href="https://wa.me/56949475207" target="_blank"
+              class="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold py-3 px-6 rounded-lg transition-all duration-200">
               Consultar 📱
             </a>
           </div>

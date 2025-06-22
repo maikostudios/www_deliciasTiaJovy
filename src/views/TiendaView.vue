@@ -1,19 +1,5 @@
 <template>
   <div class="min-h-screen">
-    <!-- Header -->
-    <section class="bg-transparent-white border-b border-gray-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center">
-          <h1 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">
-            Nuestra Tienda
-          </h1>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Explora todos nuestros productos caseros. Desde tortas personalizadas hasta pan fresco del día.
-          </p>
-        </div>
-      </div>
-    </section>
-
     <!-- Promotional Banner -->
     <PromoBanner />
 
@@ -26,33 +12,8 @@
       </div>
     </section>
 
-    <!-- Floating Cart Button (Mobile) -->
-    <div class="fixed bottom-20 right-4 z-40 md:hidden" style="bottom: calc(env(safe-area-inset-bottom) + 80px);">
-      <button
-        @click="cartStore.toggleDrawer()"
-        class="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center relative group"
-        :class="{ 'animate-bounce': cartStore.itemCount > 0 && !cartStore.isDrawerOpen }"
-      >
-        <ShoppingCartIcon class="h-6 w-6 group-hover:scale-110 transition-transform" />
-        <span
-          v-if="cartStore.itemCount > 0"
-          class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-pulse"
-        >
-          {{ cartStore.itemCount }}
-        </span>
-
-        <!-- Ripple effect on tap -->
-        <div class="absolute inset-0 rounded-full bg-white opacity-0 group-active:opacity-20 transition-opacity"></div>
-      </button>
-
-      <!-- Cart total preview (when items > 0) -->
-      <div
-        v-if="cartStore.itemCount > 0 && !cartStore.isDrawerOpen"
-        class="absolute bottom-full right-0 mb-2 bg-gray-900 text-white text-xs px-2 py-1 rounded-md whitespace-nowrap opacity-90 shadow-lg"
-      >
-        {{ cartStore.formattedTotal }}
-      </div>
-    </div>
+    <!-- Floating Cart Button & Notification -->
+    <FloatingCartButton />
 
     <!-- Info Banner -->
     <section class="bg-primary text-white py-8">
@@ -81,13 +42,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useCartStore } from '@/stores/cart'
 import { useProductsStore } from '@/stores/products'
 import ProductGrid from '@/components/products/ProductGrid.vue'
 import PromoBanner from '@/components/layout/PromoBanner.vue'
-import { ShoppingCartIcon } from '@heroicons/vue/24/outline'
+import FloatingCartButton from '@/components/cart/FloatingCartButton.vue'
 
-const cartStore = useCartStore()
 const productsStore = useProductsStore()
 const loading = ref(false)
 

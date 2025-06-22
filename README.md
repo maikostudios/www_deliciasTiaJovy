@@ -1,193 +1,275 @@
-# 🧁 Delicias Tía Jovy
+# 🧁 Delicias Tía Jovy - Documentación del Proyecto
 
-Sitio web moderno para la pastelería y mini market familiar **Delicias Tía Jovy** en Nueva Imperial, Chile.
+## 📋 Información General
+**Proyecto**: Sitio web de pastelería y mini market
+**Cliente**: Delicias Tía Jovy
+**Ubicación**: Nueva Imperial, Chile
+**Última actualización**: 21 de Junio, 2025 - 7:30 AM
+**Estado**: En desarrollo activo
 
-## 🚀 Características
+## 🛠️ Stack Tecnológico
 
-- **Vue 3 + Vite**: Framework moderno y rápido
-- **TailwindCSS**: Diseño responsivo y mobile-first
-- **Firebase**: Backend completo (Firestore + Auth)
-- **WhatsApp Integration**: Pedidos directos por WhatsApp
-- **Panel Admin**: Gestión de pedidos
-- **PWA Ready**: Optimizado para móviles
+### Frontend
+- **Framework**: Vue 3 (Composition API)
+- **Build Tool**: Vite 5.x
+- **Styling**: TailwindCSS 3.x
+- **Icons**: Heroicons Vue
+- **Router**: Vue Router 4
+- **State Management**: Pinia
 
-## 🎨 Paleta de Colores
+### Backend & Database
+- **Backend**: Firebase (Firestore Database)
+- **Authentication**: Firebase Auth
+- **Hosting**: Firebase Hosting
+- **Storage**: GitHub Repository para imágenes
 
-- 🎀 **Primary**: `#e91e63` (Rosado fuerte)
-- 💜 **Secondary**: `#4a148c` (Púrpura oscuro)
-- 🧡 **Accent**: `#f8b88b` (Naranja pastel)
-- ⚪ **White**: `#ffffff`
-- ⚫ **Black**: `#000000`
+### Herramientas de Desarrollo
+- **Package Manager**: npm
+- **Version Control**: Git + GitHub
+- **IDE**: Visual Studio Code
+- **Deployment**: Firebase CLI
 
-## 📱 Funcionalidades
+## 🎨 Configuración de Diseño
 
-### Para Clientes
-- Catálogo de productos por categorías
-- Carrito de compras
-- Formulario de pedidos
-- Integración con WhatsApp
-- Diseño mobile-first
-
-### Para Administradores
-- Panel de administración privado
-- Visualización de pedidos
-- Estadísticas básicas
-- Autenticación segura
-
-## 🛠️ Instalación
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone <repository-url>
-   cd www_deliciasTiaJovy
-   ```
-
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Firebase (✅ Ya Configurado)**
-   - Project ID: `deliciastiajovy-6cd88`
-   - Usuario admin: `deliciastiajovy@gmail.com`
-   - Contraseña: `123456`
-   - Ver detalles en `FIREBASE-SETUP.md`
-
-4. **Ejecutar en desarrollo**
-   ```bash
-   npm run dev
-   ```
-
-5. **Construir para producción**
-   ```bash
-   npm run build
-   ```
-
-## 🔧 Configuración Firebase
-
-### 1. Firestore Database
-Crear las siguientes colecciones:
-- `orders`: Para almacenar los pedidos
-
-### 2. Authentication
-- Habilitar "Email/Password" como proveedor
-- Crear usuario administrador
-
-### 3. Hosting (Opcional)
-```bash
-npm install -g firebase-tools
-firebase login
-firebase init hosting
-firebase deploy
+### Paleta de Colores
+```css
+primary: #e91e63     /* Rosa fuerte */
+secondary: #4a148c   /* Púrpura oscuro */
+accent: #f8b88b      /* Naranja pastel */
 ```
 
-## 📂 Estructura del Proyecto
+### Tipografías
+- **Sans-serif**: Inter (textos generales)
+- **Display**: Poppins (títulos y encabezados)
 
+### Responsive Design
+- **Mobile First**: Diseño optimizado para móviles
+- **Breakpoints**: Tailwind CSS estándar
+- **Units**: Preferencia por unidades relativas (rem, em, %, vw, vh)
+
+## 🔧 Configuración del Proyecto
+
+### Estructura de Directorios
 ```
 src/
 ├── components/
-│   ├── layout/          # Navbar, Footer, PromoBanner
-│   ├── products/        # ProductCard, ProductGrid
-│   ├── cart/           # CartDrawer
-│   └── order/          # OrderModal
+│   ├── cart/           # Componentes del carrito
+│   ├── layout/         # Layout principal (Navbar, Footer)
+│   ├── order/          # Sistema de pedidos
+│   ├── products/       # Componentes de productos
+│   └── ui/             # Componentes UI reutilizables
 ├── stores/             # Pinia stores
-│   ├── auth.js         # Autenticación
-│   ├── cart.js         # Carrito de compras
-│   ├── orders.js       # Gestión de pedidos
-│   └── products.js     # Catálogo de productos
 ├── views/              # Páginas principales
-│   ├── HomeView.vue    # Página de inicio
-│   ├── TiendaView.vue  # Catálogo completo
-│   ├── AdminView.vue   # Panel de administración
-│   └── LoginView.vue   # Login para admin
-├── data/               # Datos de ejemplo
+├── assets/             # Recursos estáticos
 └── router/             # Configuración de rutas
-
-public/
-├── images/
-│   ├── logos/          # Logos y material promocional
-│   │   ├── logo1_fondo_w.jpg    # Logo con fondo blanco
-│   │   ├── logo2_fondo_t.png    # Logo con fondo transparente
-│   │   └── flayer1.jpg          # Flyer promocional
-│   └── productos/      # Imágenes de productos (por agregar)
 ```
 
-## 🎯 Rutas
-
-- `/` - Página de inicio con hero y productos destacados
-- `/tienda` - Catálogo completo con filtros
-- `/admin` - Panel de administración (requiere auth)
-- `/login` - Inicio de sesión para administradores
-
-## 📱 WhatsApp Integration
-
-Los pedidos se envían automáticamente a WhatsApp con el siguiente formato:
-
-```
-🧁 NUEVO PEDIDO - DELICIAS TÍA JOVY 🧁
-
-👤 Cliente: [Nombre]
-📧 Email: [Email]
-📱 Teléfono: [Teléfono]
-
-🛒 PRODUCTOS:
-• [Producto] x[Cantidad] - $[Precio]
-
-💰 TOTAL: $[Total]
-
-💬 Comentarios: [Comentarios]
-
-📅 Fecha: [Fecha]
-⏰ Hora: [Hora]
-
-¡Gracias por tu pedido! 💕
+### Variables de Entorno
+```env
+# Firebase Configuration
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=deliciastiajovy-6cd88
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
 ```
 
-## 🔐 Seguridad
+## 📱 Funcionalidades Implementadas
 
-- Autenticación Firebase para panel admin
-- Validación de formularios
-- Sanitización de datos
-- Rutas protegidas
+### ✅ Completadas
+- [x] Catálogo de productos dinámico
+- [x] Sistema de carrito de compras
+- [x] Configuración de tortas (tamaños, rellenos, extras)
+- [x] Integración con WhatsApp para pedidos
+- [x] Base de datos de clientes
+- [x] Panel administrativo básico
+- [x] Diseño responsive
+- [x] Fondo personalizado SVG
+- [x] Sistema de navegación
 
-## 📊 SEO y Performance
+### 🔄 En Progreso
+- [ ] **CRÍTICO**: Posicionamiento del modal del carrito
+- [ ] Optimización de imágenes
+- [ ] Sistema de notificaciones mejorado
 
-- Meta tags optimizados
-- Imágenes optimizadas
-- Lazy loading
-- Core Web Vitals optimizados
-- Schema markup para negocio local
+### 📋 Pendientes
+- [ ] Sistema de inventario
+- [ ] Dashboard de analytics
+- [ ] Sistema de promociones
+- [ ] Integración con redes sociales
+- [ ] PWA (Progressive Web App)
 
-## 🚀 Deployment
+## 🚨 Problemas Conocidos
 
-### Firebase Hosting
+### 🔴 CRÍTICO - Modal del Carrito
+**Problema**: El modal del carrito sigue apareciendo en posición incorrecta
+- **Ubicación**: Aparece arriba del footer, debajo de "Entrega a domicilio"
+- **Plataformas afectadas**: ❌ Móvil Y ❌ Desktop (confirmado en ambas versiones)
+- **Esperado**: Modal centrado con overlay oscuro
+- **Última modificación**: 21/06/2025 7:30 AM
+- **Estado**: Requiere investigación adicional - problema persiste en todas las plataformas
+- **Detalles**: A pesar de implementar la estructura de modal centrado similar al OrderModal, el carrito no se posiciona correctamente en ninguna versión
+
+### 🟡 Menores
+- Optimización de carga de imágenes desde GitHub
+- Mejoras en la experiencia móvil del admin panel
+- Validación de formularios mejorada
+
+## 📦 Instalación y Configuración
+
+### Prerrequisitos
 ```bash
-npm run build
-firebase deploy
+Node.js >= 18.0.0
+npm >= 9.0.0
+Git
+Firebase CLI (opcional para deployment)
 ```
 
-### Netlify
+### Instalación desde Cero
 ```bash
-npm run build
-# Subir carpeta dist/
+# 1. Clonar el repositorio
+git clone https://github.com/maikostudios/www_deliciasTiaJovy.git
+cd www_deliciasTiaJovy
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Configurar variables de entorno
+cp .env.example .env.local
+# Editar .env.local con las credenciales de Firebase
+
+# 4. Iniciar servidor de desarrollo
+npm run dev
 ```
 
-### Vercel
+### Configuración de Firebase
+1. Crear proyecto en Firebase Console
+2. Activar Firestore Database
+3. Configurar reglas de seguridad
+4. Obtener credenciales del proyecto
+5. Actualizar variables de entorno
+
+### Credenciales Actuales
+- **Project ID**: `deliciastiajovy-6cd88`
+- **Usuario admin**: `deliciastiajovy@gmail.com`
+- **Contraseña**: `123456`
+
+## 🌐 Deployment
+
+### Ramas de Trabajo
+- **main**: Código estable
+- **develop**: Desarrollo activo
+- **produccion**: Versión de producción
+
+### Proceso de Deployment
 ```bash
+# 1. Build del proyecto
 npm run build
-# Conectar repositorio
+
+# 2. Deploy a Firebase Hosting
+firebase deploy --only hosting
+
+# 3. URL de producción
+https://deliciastiajovy.cl
 ```
 
-## 📞 Contacto
+## 📊 Últimos Commits
 
-- **Ubicación**: Nueva Imperial, Chile
-- **WhatsApp**: +56 9 1234 5678
-- **Email**: contacto@deliciastiajovy.cl
+### Commit más reciente: `fa2b8a5`
+**Fecha**: 21/06/2025 7:30 AM
+**Mensaje**: "📚 Docs: Crear documentación completa del proyecto"
+**Cambios**:
+- Documentación técnica completa
+- README actualizado con stack tecnológico
+- Problema del carrito documentado
 
-## 📄 Licencia
+### Commit anterior: `874c3df`
+**Fecha**: 21/06/2025 7:30 AM
+**Mensaje**: "🔧 Fix: Convertir CartDrawer de sidebar a modal centrado"
+**Cambios**:
+- Transformación de drawer lateral a modal
+- Mejoras responsive
+- Corrección de z-index y overlay
+- **Estado**: ❌ Problema persiste en móvil Y desktop
 
-Este proyecto está desarrollado para uso exclusivo de **Delicias Tía Jovy**.
+### Commits Anteriores
+- `c72c53f`: Agregar carpeta public completa con imágenes
+- `6e4e751`: Implementar fondo SVG personalizado
+- `c3022d1`: CRITICAL FIX: Cart not saving cake configuration
+- `3c92a35`: Fix: Complete cake configuration display
+- `8203cab`: UX Improvement: Change cake filling selection
+
+## 🔗 Enlaces Importantes
+
+### Repositorios
+- **Código**: https://github.com/maikostudios/www_deliciasTiaJovy.git
+- **Assets**: https://github.com/maikostudios/assets_delicias_tia_jovy.git
+
+### Servicios
+- **Sitio Web**: https://deliciastiajovy.cl
+- **Firebase Console**: https://console.firebase.google.com/project/deliciastiajovy-6cd88
+- **WhatsApp Business**: +56949475207
+
+### Ubicación
+- **Google Maps**: https://maps.app.goo.gl/7cyDJrE6joqzzSS58
+- **Dirección**: Nueva Imperial, Chile
+
+## 👥 Contactos
+
+### Cliente
+- **Email**: deliciastiajovy@gmail.com
+- **Password**: 123456 (Firebase Admin)
+
+### Desarrollo
+- **Estudio**: Maikostudios
+- **Web**: www.maikostudios.com
+
+## 📝 Notas de Desarrollo
+
+### Convenciones de Código
+- Usar Composition API de Vue 3
+- Preferir unidades relativas en CSS
+- Componentes reutilizables en `/components/ui/`
+- Stores organizados por funcionalidad
+
+### Testing
+- Probar en dispositivos móviles reales
+- Verificar funcionalidad del carrito
+- Validar integración con WhatsApp
+- Comprobar responsive design
+
+### Archivos Importantes
+```
+.env.local              # Variables de entorno (crear)
+firebase.json           # Configuración Firebase
+tailwind.config.js      # Configuración TailwindCSS
+vite.config.js          # Configuración Vite
+package.json            # Dependencias del proyecto
+```
+
+## 🚨 Checklist para Nuevo Dispositivo
+
+### ✅ Instalación Básica
+- [ ] Node.js >= 18.0.0 instalado
+- [ ] Git configurado
+- [ ] Clonar repositorio
+- [ ] `npm install`
+- [ ] Crear `.env.local` con credenciales Firebase
+
+### ✅ Configuración Firebase
+- [ ] Acceso a Firebase Console
+- [ ] Verificar reglas de Firestore
+- [ ] Probar autenticación admin
+- [ ] Validar conexión a base de datos
+
+### ✅ Testing
+- [ ] `npm run dev` funciona
+- [ ] Carrito funciona (verificar posicionamiento)
+- [ ] WhatsApp integration funciona
+- [ ] Admin panel accesible
+- [ ] Responsive design correcto
 
 ---
-
-Hecho con 💕 para endulzar tu día
+**Última actualización**: 21 de Junio, 2025 - 7:30 AM
+**Mantenido por**: Maikostudios

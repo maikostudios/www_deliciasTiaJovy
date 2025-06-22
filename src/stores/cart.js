@@ -1,34 +1,43 @@
-import { defineStore } from 'pinia'
-import { ref, computed, watch } from 'vue'
+import { defineStore } from "pinia";
+import { ref, computed, watch } from "vue";
 
-export const useCartStore = defineStore('cart', () => {
+export const useCartStore = defineStore("cart", () => {
   // State - Load from localStorage
-  const items = ref(JSON.parse(localStorage.getItem('cart-items') || '[]'))
-  const isDrawerOpen = ref(false)
+  const items = ref(JSON.parse(localStorage.getItem("cart-items") || "[]"));
+  const isModalOpen = ref(false);
+  const showNotification = ref(false);
+  const lastAddedProduct = ref(null);
 
   // Watch for changes and persist to localStorage
-  watch(items, (newItems) => {
-    localStorage.setItem('cart-items', JSON.stringify(newItems))
-  }, { deep: true })
+  watch(
+    items,
+    (newItems) => {
+      localStorage.setItem("cart-items", JSON.stringify(newItems));
+    },
+    { deep: true }
+  );
 
   // Getters
   const itemCount = computed(() => {
-    return items.value.reduce((total, item) => total + item.quantity, 0)
-  })
+    return items.value.reduce((total, item) => total + item.quantity, 0);
+  });
 
   const totalPrice = computed(() => {
-    return items.value.reduce((total, item) => total + (item.price * item.quantity), 0)
-  })
+    return items.value.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  });
 
   const formattedTotal = computed(() => {
-    return new Intl.NumberFormat('es-CL', {
-      style: 'currency',
-      currency: 'CLP'
-    }).format(totalPrice.value)
-  })
+    return new Intl.NumberFormat("es-CL", {
+      style: "currency",
+      currency: "CLP",
+    }).format(totalPrice.value);
+  });
 
   // Actions
-  function addItem(product, options = {}) {
+  function addItem(product) {
     // Para productos configurables (tortas), cada configuración es única
     // por lo que no debemos buscar items existentes, siempre agregar nuevo
     if (product.configuration) {
@@ -39,14 +48,16 @@ export const useCartStore = defineStore('cart', () => {
         image: product.image,
         category: product.category,
         quantity: 1,
-        configuration: product.configuration // ✅ Preservar configuración
-      })
+        configuration: product.configuration, // ✅ Preservar configuración
+      });
     } else {
       // Para productos simples, buscar si ya existe y aumentar cantidad
-      const existingItem = items.value.find(item => item.id === product.id && !item.configuration)
+      const existingItem = items.value.find(
+        (item) => item.id === product.id && !item.configuration
+      );
 
       if (existingItem) {
-        existingItem.quantity += 1
+        existingItem.quantity += 1;
       } else {
         items.value.push({
           id: product.id,
@@ -54,71 +65,61 @@ export const useCartStore = defineStore('cart', () => {
           price: product.price,
           image: product.image,
           category: product.category,
-          quantity: 1
-        })
+          quantity: 1,
+        });
       }
     }
 
-    // 🎯 Mostrar notificación de éxito si no está deshabilitada
-    if (!options.silent) {
-      // Usar notificaciones store si está disponible
-      try {
-        // Importación dinámica para evitar dependencias circulares
-        import('@/stores/notifications').then(({ useNotificationsStore }) => {
-          const notificationsStore = useNotificationsStore()
-          notificationsStore.productAdded(product.name)
-        })
-      } catch (error) {
-        console.log('📱 Producto agregado:', product.name)
-      }
-    }
+    // Trigger notification
+    lastAddedProduct.value = product.name;
+    showNotification.value = true;
 
-    // 🎯 Auto-abrir carrito en móvil si está configurado
-    if (options.autoOpenCart && window.innerWidth <= 768) {
-      setTimeout(() => {
-        openDrawer()
-      }, 500) // Delay para que se vea la notificación primero
-    }
+    // Auto-hide notification after 3 seconds
+    setTimeout(() => {
+      showNotification.value = false;
+    }, 3000);
   }
 
   function removeItem(productId) {
-    const index = items.value.findIndex(item => item.id === productId)
+    const index = items.value.findIndex((item) => item.id === productId);
     if (index > -1) {
-      items.value.splice(index, 1)
+      items.value.splice(index, 1);
     }
   }
 
   function updateQuantity(productId, quantity) {
-    const item = items.value.find(item => item.id === productId)
+    const item = items.value.find((item) => item.id === productId);
     if (item) {
       if (quantity <= 0) {
-        removeItem(productId)
+        removeItem(productId);
       } else {
-        item.quantity = quantity
+        item.quantity = quantity;
       }
     }
   }
 
   function clearCart() {
-    items.value = []
+    items.value = [];
   }
 
-  function openDrawer() {
-    isDrawerOpen.value = true
+  function openModal() {
+    isModalOpen.value = true;
   }
 
-  function closeDrawer() {
-    isDrawerOpen.value = false
+  function closeModal() {
+    isModalOpen.value = false;
   }
 
-  function toggleDrawer() {
-    isDrawerOpen.value = !isDrawerOpen.value
+  function toggleModal() {
+    isModalOpen.value = !isModalOpen.value;
   }
 
   return {
     // State
     items,
-    isDrawerOpen,
+    isModalOpen,
+    showNotification,
+    lastAddedProduct,
     // Getters
     itemCount,
     totalPrice,
@@ -128,8 +129,8 @@ export const useCartStore = defineStore('cart', () => {
     removeItem,
     updateQuantity,
     clearCart,
-    openDrawer,
-    closeDrawer,
-    toggleDrawer
-  }
-})
+    openModal,
+    closeModal,
+    toggleModal,
+  };
+});
