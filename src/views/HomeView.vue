@@ -138,26 +138,44 @@
 
           <!-- Content -->
           <div class="space-y-6">
-            <div>
-              <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">
-                Conoce a la Tía Jovy
-              </h2>
-              <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+            <!-- Header with gradient background -->
+            <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+              <div class="flex items-center space-x-3 mb-4">
+                <span class="text-3xl">👩‍🍳</span>
+                <h2 class="text-3xl sm:text-4xl font-display font-bold">
+                  Conoce a la Tía Jovy
+                </h2>
+                <span class="text-3xl">✨</span>
+              </div>
+              <p class="text-lg text-white/95 leading-relaxed">
+                <strong class="text-yellow-200">Más de 15 años</strong> endulzando los días de Nueva Imperial con
+                <strong class="text-yellow-200">amor y tradición familiar</strong>
+              </p>
             </div>
 
-            <div class="space-y-4 text-gray-600 leading-relaxed">
-              <p>
-                Con más de 15 años de experiencia en la repostería, la Tía Jovy ha convertido su pasión
-                por la cocina en un negocio familiar que endulza los días de Nueva Imperial.
-              </p>
-              <p>
-                Cada producto es elaborado artesanalmente con ingredientes frescos y de calidad,
-                manteniendo las recetas tradicionales que han pasado de generación en generación.
-              </p>
-              <p>
-                Desde tortas personalizadas hasta pan amasado recién horneado, en Delicias Tía Jovy
-                encontrarás el sabor casero que tanto extrañas.
-              </p>
+            <!-- Story content with improved styling -->
+            <div class="bg-white rounded-xl shadow-lg p-6 space-y-4 text-gray-700 leading-relaxed">
+              <div class="flex items-start space-x-3">
+                <span class="text-2xl mt-1">🏆</span>
+                <p>
+                  Con más de 15 años de experiencia en la repostería, la Tía Jovy ha convertido su pasión
+                  por la cocina en un negocio familiar que endulza los días de Nueva Imperial.
+                </p>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-2xl mt-1">🌿</span>
+                <p>
+                  Cada producto es elaborado artesanalmente con ingredientes frescos y de calidad,
+                  manteniendo las recetas tradicionales que han pasado de generación en generación.
+                </p>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-2xl mt-1">🏠</span>
+                <p>
+                  Desde tortas personalizadas hasta pan amasado recién horneado, en Delicias Tía Jovy
+                  encontrarás el sabor casero que tanto extrañas.
+                </p>
+              </div>
             </div>
 
             <div class="grid grid-cols-2 gap-4 pt-4">
@@ -181,12 +199,20 @@
     <section id="productos-destacados" class="py-16 lg:py-24 bg-transparent-gray">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">
-            Productos Destacados
-          </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
-            Descubre nuestros productos más populares, hechos con amor y los mejores ingredientes
-          </p>
+          <!-- Header with gradient background -->
+          <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-8 mb-8 shadow-lg">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+              <span class="text-4xl">⭐</span>
+              <h2 class="text-3xl sm:text-4xl font-display font-bold text-white">
+                Productos Destacados
+              </h2>
+              <span class="text-4xl">🧁</span>
+            </div>
+            <p class="text-xl text-white/95 max-w-3xl mx-auto leading-relaxed">
+              Descubre nuestros productos más populares, hechos con
+              <strong class="text-yellow-200">amor y los mejores ingredientes</strong>
+            </p>
+          </div>
 
           <!-- Value Proposition for Configurable Cakes -->
           <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 max-w-4xl mx-auto shadow-lg">
