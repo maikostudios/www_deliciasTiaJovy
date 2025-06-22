@@ -8,15 +8,16 @@
           <!-- Content -->
           <div class="text-center lg:text-left space-y-6">
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight">
-              Endulzamos tu día
+              En Delicias Tía Jovy endulzamos tu día
             </h1>
             <p class="text-xl sm:text-2xl text-white/90 leading-relaxed">
               Pastelería y mini market familiar en Nueva Imperial.
               Productos caseros hechos con amor y los mejores ingredientes.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <RouterLink to="/tienda" class="btn-accent text-lg px-8 py-4">
-                Ver Productos 🧁
+              <RouterLink to="/tienda"
+                class="inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary/90 text-white border-2 border-white transition-all duration-200 rounded-lg font-semibold text-lg">
+                🏪 Tienda
               </RouterLink>
               <button @click="scrollToLocationSection"
                 class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg">
@@ -138,56 +139,59 @@
 
           <!-- Content -->
           <div class="space-y-6">
-            <!-- Header with gradient background -->
-            <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
-              <div class="flex items-center space-x-3 mb-4">
-                <span class="text-3xl">👩‍🍳</span>
-                <h2 class="text-3xl sm:text-4xl font-display font-bold">
-                  Conoce a la Tía Jovy
-                </h2>
-                <span class="text-3xl">✨</span>
+            <!-- Story content with header and improved styling -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <!-- Header -->
+              <div class="bg-gradient-to-r from-primary to-secondary p-6 text-white">
+                <div class="flex items-center space-x-3 mb-3">
+                  <span class="text-3xl">👩‍🍳</span>
+                  <h2 class="text-3xl sm:text-4xl font-display font-bold">
+                    Conoce a la Tía Jovy
+                  </h2>
+                  <span class="text-3xl">✨</span>
+                </div>
+                <p class="text-lg text-white/95 leading-relaxed">
+                  <strong class="text-yellow-200">Más de 15 años</strong> endulzando los días de Nueva Imperial con
+                  <strong class="text-yellow-200">amor y tradición familiar</strong>
+                </p>
               </div>
-              <p class="text-lg text-white/95 leading-relaxed">
-                <strong class="text-yellow-200">Más de 15 años</strong> endulzando los días de Nueva Imperial con
-                <strong class="text-yellow-200">amor y tradición familiar</strong>
-              </p>
-            </div>
 
-            <!-- Story content with improved styling -->
-            <div class="bg-white rounded-xl shadow-lg p-6 space-y-4 text-gray-700 leading-relaxed">
-              <div class="flex items-start space-x-3">
-                <span class="text-2xl mt-1">🏆</span>
-                <p>
-                  Con más de 15 años de experiencia en la repostería, la Tía Jovy ha convertido su pasión
-                  por la cocina en un negocio familiar que endulza los días de Nueva Imperial.
-                </p>
+              <!-- Content -->
+              <div class="p-6 space-y-4 text-gray-700 leading-relaxed">
+                <div class="flex items-start space-x-3">
+                  <span class="text-2xl mt-1">🏆</span>
+                  <p>
+                    Con más de 15 años de experiencia en la repostería, la Tía Jovy ha convertido su pasión
+                    por la cocina en un negocio familiar que endulza los días de Nueva Imperial.
+                  </p>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <span class="text-2xl mt-1">🌿</span>
+                  <p>
+                    Cada producto es elaborado artesanalmente con ingredientes frescos y de calidad,
+                    manteniendo las recetas tradicionales que han pasado de generación en generación.
+                  </p>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <span class="text-2xl mt-1">🏠</span>
+                  <p>
+                    Desde tortas personalizadas hasta pan amasado recién horneado, en Delicias Tía Jovy
+                    encontrarás el sabor casero que tanto extrañas.
+                  </p>
+                </div>
               </div>
-              <div class="flex items-start space-x-3">
-                <span class="text-2xl mt-1">🌿</span>
-                <p>
-                  Cada producto es elaborado artesanalmente con ingredientes frescos y de calidad,
-                  manteniendo las recetas tradicionales que han pasado de generación en generación.
-                </p>
-              </div>
-              <div class="flex items-start space-x-3">
-                <span class="text-2xl mt-1">🏠</span>
-                <p>
-                  Desde tortas personalizadas hasta pan amasado recién horneado, en Delicias Tía Jovy
-                  encontrarás el sabor casero que tanto extrañas.
-                </p>
-              </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-4 pt-4">
-              <div class="text-center p-4 bg-gray-50 rounded-lg">
-                <div class="text-2xl mb-2">🏆</div>
-                <p class="font-semibold text-gray-900">15+ Años</p>
-                <p class="text-sm text-gray-600">de experiencia</p>
-              </div>
-              <div class="text-center p-4 bg-gray-50 rounded-lg">
-                <div class="text-2xl mb-2">❤️</div>
-                <p class="font-semibold text-gray-900">100%</p>
-                <p class="text-sm text-gray-600">Casero</p>
+              <div class="grid grid-cols-2 gap-4 pt-4">
+                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                  <div class="text-2xl mb-2">🏆</div>
+                  <p class="font-semibold text-gray-900">15+ Años</p>
+                  <p class="text-sm text-gray-600">de experiencia</p>
+                </div>
+                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                  <div class="text-2xl mb-2">❤️</div>
+                  <p class="font-semibold text-gray-900">100%</p>
+                  <p class="text-sm text-gray-600">Casero</p>
+                </div>
               </div>
             </div>
           </div>
@@ -272,13 +276,21 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="text-center mb-12">
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-4">
-            📍 Visítanos en Nueva Imperial
-          </h2>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Te esperamos en nuestro acogedor local. ¡Ven a disfrutar de nuestros productos frescos y el ambiente
-            familiar!
-          </p>
+          <!-- Header with gradient background -->
+          <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-8 shadow-lg">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+              <span class="text-4xl">📍</span>
+              <h2 class="text-3xl sm:text-4xl font-display font-bold text-white">
+                Visítanos en Nueva Imperial
+              </h2>
+              <span class="text-4xl">🏪</span>
+            </div>
+            <p class="text-xl text-white/95 max-w-3xl mx-auto leading-relaxed">
+              Te esperamos en nuestro <strong class="text-yellow-200">acogedor local</strong>.
+              ¡Ven a disfrutar de nuestros productos frescos y el
+              <strong class="text-yellow-200">ambiente familiar</strong>!
+            </p>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -307,12 +319,16 @@
           <!-- Info & Navigation Section -->
           <div class="order-1 lg:order-2 space-y-8">
             <!-- Address Info -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <span class="text-2xl mr-3">🏪</span>
-                Información del Local
-              </h3>
-              <div class="space-y-3 text-gray-600">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <!-- Header -->
+              <div class="bg-gradient-to-r from-primary to-secondary p-4 text-white">
+                <h3 class="text-xl font-semibold flex items-center">
+                  <span class="text-2xl mr-3">🏪</span>
+                  Información del Local
+                </h3>
+              </div>
+              <!-- Content -->
+              <div class="p-6 space-y-3 text-gray-600">
                 <div class="flex items-start space-x-3">
                   <span class="text-primary mt-1">📍</span>
                   <div>
@@ -342,44 +358,50 @@
             </div>
 
             <!-- Navigation Buttons -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <span class="text-2xl mr-3">🧭</span>
-                Cómo Llegar
-              </h3>
-              <p class="text-gray-600 mb-6">
-                Elige tu aplicación de navegación favorita para llegar hasta nosotros.
-                Los enlaces se abren directamente en tu app preferida:
-              </p>
-
-              <!-- Botón Principal -->
-              <div class="mb-6">
-                <button @click="openDirectLink"
-                  class="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
-                  <span class="text-2xl">🎯</span>
-                  <div class="text-left">
-                    <div class="text-lg">¡Navegar Ahora!</div>
-                    <div class="text-sm opacity-90">Enlace directo a Google Maps</div>
-                  </div>
-                </button>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+              <!-- Header -->
+              <div class="bg-gradient-to-r from-primary to-secondary p-4 text-white">
+                <h3 class="text-xl font-semibold flex items-center">
+                  <span class="text-2xl mr-3">🧭</span>
+                  Cómo Llegar
+                </h3>
               </div>
+              <!-- Content -->
+              <div class="p-6">
+                <p class="text-gray-600 mb-6">
+                  Elige tu aplicación de navegación favorita para llegar hasta nosotros.
+                  Los enlaces se abren directamente en tu app preferida:
+                </p>
 
-              <!-- Otras Opciones -->
-              <p class="text-sm text-gray-500 mb-4 text-center">O elige tu app favorita:</p>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Apple Maps -->
-                <button @click="openAppleMaps"
-                  class="flex items-center justify-center space-x-3 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                  <span class="text-xl">🍎</span>
-                  <span>Apple Maps</span>
-                </button>
+                <!-- Botón Principal -->
+                <div class="mb-6">
+                  <button @click="openDirectLink"
+                    class="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                    <span class="text-2xl">🎯</span>
+                    <div class="text-left">
+                      <div class="text-lg">¡Navegar Ahora!</div>
+                      <div class="text-sm opacity-90">Enlace directo a Google Maps</div>
+                    </div>
+                  </button>
+                </div>
 
-                <!-- Waze -->
-                <button @click="openWaze"
-                  class="flex items-center justify-center space-x-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                  <span class="text-xl">🚗</span>
-                  <span>Waze</span>
-                </button>
+                <!-- Otras Opciones -->
+                <p class="text-sm text-gray-500 mb-4 text-center">O elige tu app favorita:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <!-- Apple Maps -->
+                  <button @click="openAppleMaps"
+                    class="flex items-center justify-center space-x-3 bg-gray-800 hover:bg-gray-900 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <span class="text-xl">🍎</span>
+                    <span>Apple Maps</span>
+                  </button>
+
+                  <!-- Waze -->
+                  <button @click="openWaze"
+                    class="flex items-center justify-center space-x-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <span class="text-xl">🚗</span>
+                    <span>Waze</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -387,8 +409,8 @@
       </div>
     </section>
 
-    <!-- Floating Cart Button & Notification -->
-    <FloatingCartButton />
+    <!-- Floating Action Buttons -->
+    <FloatingActionButtons />
 
   </div>
 </template>
@@ -399,7 +421,7 @@ import { RouterLink } from 'vue-router'
 import { useProductsStore } from '@/stores/products'
 import ProductCard from '@/components/products/ProductCard.vue'
 import ConfigurableProductCard from '@/components/products/ConfigurableProductCard.vue'
-import FloatingCartButton from '@/components/cart/FloatingCartButton.vue'
+import FloatingActionButtons from '@/components/ui/FloatingActionButtons.vue'
 
 const productsStore = useProductsStore()
 
