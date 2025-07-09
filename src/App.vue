@@ -14,6 +14,9 @@
     <!-- Order Modal -->
     <OrderModal />
 
+    <!-- Success Modal -->
+    <PedidoExitosoModal />
+
     <!-- Footer -->
     <Footer />
 
@@ -28,6 +31,7 @@ import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
 import CartModal from './components/cart/CartModal.vue'
 import OrderModal from './components/order/OrderModal.vue'
+import PedidoExitosoModal from './components/order/PedidoExitosoModal.vue'
 import NotificationContainer from './components/ui/NotificationContainer.vue'
 </script>
 

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch, onMounted } from "vue";
 import {
   collection,
   addDoc,
@@ -18,6 +18,8 @@ export const useOrdersStore = defineStore("orders", () => {
   const loading = ref(false);
   const error = ref(null);
   const isOrderModalOpen = ref(false);
+  const isSuccessModalOpen = ref(false);
+  const lastOrder = ref(null);
 
   // Actions
   async function createOrder(orderData) {
@@ -78,6 +80,22 @@ export const useOrdersStore = defineStore("orders", () => {
 
   function closeOrderModal() {
     isOrderModalOpen.value = false;
+  }
+
+  function openSuccessModal() {
+    isSuccessModalOpen.value = true;
+  }
+
+  function closeSuccessModal() {
+    isSuccessModalOpen.value = false;
+    // Clear lastOrder after modal closes
+    setTimeout(() => {
+      lastOrder.value = null;
+    }, 300);
+  }
+
+  function setLastOrder(orderData) {
+    lastOrder.value = orderData;
   }
 
   async function updateOrderStatus(orderId, newStatus) {
@@ -242,7 +260,7 @@ export const useOrdersStore = defineStore("orders", () => {
 
     message += `🎉 ¡Gracias por elegir Delicias Tía Jovy!\n`;
     message += `Te contactaremos pronto para confirmar detalles y coordinar la entrega. 💕\n\n`;
-    message += `📱 WhatsApp: ‪+56984630545‬\n`;
+    message += `📱 WhatsApp: ‪+56 9 4947 5207‬\n`;
     message += `📍 Nueva Imperial, Región de La Araucanía`;
 
     return encodeURIComponent(message);
@@ -250,7 +268,7 @@ export const useOrdersStore = defineStore("orders", () => {
 
   // Funciones auxiliares para obtener información detallada
   function formatPhoneNumber(phone) {
-    // Formatear teléfono como ‪+56984630545‬
+    // Formatear teléfono como ‪+56 9 4947 5207‬
     const cleaned = phone.replace(/\D/g, "");
     if (cleaned.startsWith("56")) {
       const number = cleaned.substring(2);
@@ -378,12 +396,40 @@ export const useOrdersStore = defineStore("orders", () => {
     window.open(whatsappUrl, "_blank");
   }
 
+  // Persistencia con sessionStorage
+  watch(
+    lastOrder,
+    (newOrder) => {
+      if (newOrder) {
+        sessionStorage.setItem("lastOrder", JSON.stringify(newOrder));
+      } else {
+        sessionStorage.removeItem("lastOrder");
+      }
+    },
+    { deep: true }
+  );
+
+  // Restaurar lastOrder al montar
+  onMounted(() => {
+    const stored = sessionStorage.getItem("lastOrder");
+    if (stored) {
+      try {
+        lastOrder.value = JSON.parse(stored);
+      } catch (error) {
+        console.warn("Error parsing stored lastOrder:", error);
+        sessionStorage.removeItem("lastOrder");
+      }
+    }
+  });
+
   return {
     // State
     orders,
     loading,
     error,
     isOrderModalOpen,
+    isSuccessModalOpen,
+    lastOrder,
     // Actions
     createOrder,
     fetchOrders,
@@ -391,6 +437,9 @@ export const useOrdersStore = defineStore("orders", () => {
     deleteOrder,
     openOrderModal,
     closeOrderModal,
+    openSuccessModal,
+    closeSuccessModal,
+    setLastOrder,
     clearError,
     generateWhatsAppMessage,
     openWhatsApp,
