@@ -249,9 +249,8 @@ const resetForm = () => {
   }
 }
 
-const handleSubmit = async () => {
-  if (!isFormValid.value) return
-
+// Función separada para procesar el pedido
+const procesarPedido = async () => {
   try {
     // Prepare customer data
     const customerData = {
@@ -289,30 +288,41 @@ const handleSubmit = async () => {
       })),
       total: cartStore.totalPrice,
       comments: form.value.comments.trim(),
-      customerId: customerResult.customerId || null
+      customerId: customerResult.customerId || null,
+      customerResult // Incluir resultado del cliente para el modal
     }
 
     // Save order to Firestore
     const orderResult = await ordersStore.createOrder(orderData)
 
     if (orderResult.success) {
-      // Open WhatsApp with pre-filled message
-      ordersStore.openWhatsApp(orderData)
-
-      // Clear cart and close modal
-      cartStore.clearCart()
-      ordersStore.closeOrderModal()
-      resetForm()
-
-      // Show success message
-      const customerMessage = customerResult.isNew
-        ? '¡Bienvenido a nuestra familia de clientes! '
-        : '¡Gracias por volver! '
-
-      alert(`${customerMessage}Pedido enviado. Te redirigimos a WhatsApp para completar tu pedido.`)
+      return { success: true, orderData }
+    } else {
+      return { success: false, error: orderResult.error }
     }
   } catch (error) {
     console.error('Error processing order:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+const handleSubmit = async () => {
+  if (!isFormValid.value) return
+
+  const resultado = await procesarPedido()
+
+  if (resultado.success) {
+    // Guardar el pedido para el modal de éxito
+    ordersStore.setLastOrder(resultado.orderData)
+
+    // Clear cart and close modal
+    cartStore.clearCart()
+    ordersStore.closeOrderModal()
+    resetForm()
+
+    // Mostrar modal de éxito en lugar de alert
+    ordersStore.openSuccessModal()
+  } else {
     alert('Hubo un error al procesar tu pedido. Por favor, inténtalo de nuevo.')
   }
 }
