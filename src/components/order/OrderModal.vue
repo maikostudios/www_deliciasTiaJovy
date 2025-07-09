@@ -57,7 +57,8 @@
                   <label for="rut" class="block text-sm font-medium text-gray-700 mb-1">
                     RUT (opcional)
                   </label>
-                  <input id="rut" v-model="form.rut" type="text" class="input-field" placeholder="12.345.678-9" />
+                  <input id="rut" v-model="form.rut" @input="formatRutInput" type="text" class="input-field"
+                    placeholder="12.345.678-9" maxlength="12" />
                 </div>
               </div>
 
@@ -191,6 +192,43 @@ const isFormValid = computed(() => {
 })
 
 const formatPrice = (price) => productsStore.formatPrice(price)
+
+// RUT formatting functions
+const formatRut = (rut) => {
+  // Remove all non-numeric characters except 'k' or 'K'
+  const cleaned = rut.replace(/[^0-9kK]/g, '')
+
+  if (cleaned.length === 0) return ''
+
+  // Separate the verification digit
+  const body = cleaned.slice(0, -1)
+  const verifier = cleaned.slice(-1).toUpperCase()
+
+  if (body.length === 0) return verifier
+
+  // Format the body with dots
+  const formattedBody = body.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+  // Return formatted RUT
+  return `${formattedBody}-${verifier}`
+}
+
+const formatRutInput = (event) => {
+  const input = event.target
+  const cursorPosition = input.selectionStart
+  const oldValue = input.value
+  const newValue = formatRut(oldValue)
+
+  // Update the form value
+  form.value.rut = newValue
+
+  // Restore cursor position (approximately)
+  nextTick(() => {
+    const lengthDiff = newValue.length - oldValue.length
+    const newCursorPosition = Math.max(0, cursorPosition + lengthDiff)
+    input.setSelectionRange(newCursorPosition, newCursorPosition)
+  })
+}
 
 const handleOverlayClick = (event) => {
   if (event.target === event.currentTarget) {
