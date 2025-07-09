@@ -350,7 +350,7 @@
                   <div>
                     <p class="font-medium text-gray-900">Contacto</p>
                     <a href="https://wa.me/56949475207" class="text-primary hover:text-primary/80 transition-colors">
-                      +56 9 4947 5207
+                      +56984630545
                     </a>
                   </div>
                 </div>

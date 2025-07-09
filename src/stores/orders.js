@@ -242,7 +242,7 @@ export const useOrdersStore = defineStore("orders", () => {
 
     message += `🎉 ¡Gracias por elegir Delicias Tía Jovy!\n`;
     message += `Te contactaremos pronto para confirmar detalles y coordinar la entrega. 💕\n\n`;
-    message += `📱 WhatsApp: ‪+56 9 4947 5207‬\n`;
+    message += `📱 WhatsApp: ‪+56984630545‬\n`;
     message += `📍 Nueva Imperial, Región de La Araucanía`;
 
     return encodeURIComponent(message);
@@ -250,7 +250,7 @@ export const useOrdersStore = defineStore("orders", () => {
 
   // Funciones auxiliares para obtener información detallada
   function formatPhoneNumber(phone) {
-    // Formatear teléfono como ‪+56 9 4947 5207‬
+    // Formatear teléfono como ‪+56984630545‬
     const cleaned = phone.replace(/\D/g, "");
     if (cleaned.startsWith("56")) {
       const number = cleaned.substring(2);

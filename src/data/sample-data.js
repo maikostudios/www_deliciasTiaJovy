@@ -217,7 +217,7 @@ export const businessInfo = {
   description:
     "Pastelería y mini market familiar en Nueva Imperial, Chile. Productos caseros hechos con amor y los mejores ingredientes.",
   address: "Nueva Imperial, Región de La Araucanía, Chile",
-  phone: "+56 9 4947 5207",
+  phone: "+56984630545",
   whatsapp: "56949475207",
   email: "contacto@deliciastiajovy.cl",
   hours: {

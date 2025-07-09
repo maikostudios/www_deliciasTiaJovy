@@ -178,7 +178,7 @@ npm run dev
 
 ### Configuración por Ambiente
 
-- **develop**: `+56 9 4947 5207` (Número de pruebas)
+- **develop**: `+56984630545` (Número de pruebas)
 - **main**: `+56 9 8463 0545` (Número real de producción)
 
 > 📋 **Documentación completa**: Ver [PHONE-NUMBERS-STRATEGY.md](./PHONE-NUMBERS-STRATEGY.md)

@@ -9,7 +9,7 @@ export const businessConfig = {
   // Contacto
   contact: {
     email: "deliciastiajovy@gmail.com",
-    phone: "+56 9 4947 5207", // Número de pruebas para desarrollo
+    phone: "+56984630545", // Número de pruebas para desarrollo
     whatsapp: "56949475207", // Número de pruebas para desarrollo
     address: "Nueva Imperial, Región de La Araucanía, Chile",
   },
