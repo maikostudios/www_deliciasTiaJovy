@@ -371,7 +371,7 @@ export const useOrdersStore = defineStore("orders", () => {
     );
   }
 
-  function openWhatsApp(orderData, phoneNumber = "56984630545") {
+  function openWhatsApp(orderData, phoneNumber = "56949475207") {
     // Número real de WhatsApp de Delicias Tía Jovy
     const message = generateWhatsAppMessage(orderData);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;

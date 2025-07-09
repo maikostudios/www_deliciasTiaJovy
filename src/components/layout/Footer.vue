@@ -21,7 +21,7 @@
           </p>
           <div class="flex space-x-4">
             <a
-              href="https://wa.me/56984630545"
+              href="https://wa.me/56949475207"
               target="_blank"
               class="text-gray-300 hover:text-accent transition-colors duration-200"
             >
@@ -70,8 +70,8 @@
             </div>
             <div class="flex items-center space-x-2">
               <span>📱</span>
-              <a href="https://wa.me/56984630545" class="hover:text-accent transition-colors duration-200">
-                +56 9 8463 0545
+              <a href="https://wa.me/56949475207" class="hover:text-accent transition-colors duration-200">
+                +56 9 4947 5207
               </a>
             </div>
             <div class="flex items-center space-x-2">
