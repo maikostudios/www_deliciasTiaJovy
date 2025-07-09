@@ -17,7 +17,7 @@ El proyecto maneja **dos números de WhatsApp diferentes** según el ambiente:
 
 ```
 📱 Número de Pruebas: +56984630545
-🔗 WhatsApp ID: 56949475207
+🔗 WhatsApp ID: 56984630545
 🎯 Propósito: Testing y desarrollo
 ```
 
@@ -111,10 +111,10 @@ git checkout develop
 // DEVELOP (Pruebas)
 contact: {
   phone: "+56984630545",
-  whatsapp: "56949475207",
+  whatsapp: "56984630545",
 },
 social: {
-  whatsapp: "https://wa.me/56949475207",
+  whatsapp: "https://wa.me/56984630545",
 }
 
 // MAIN (Producción)
@@ -131,7 +131,7 @@ social: {
 
 ```javascript
 // DEVELOP (Pruebas)
-function openWhatsApp(orderData, phoneNumber = "56949475207") {
+function openWhatsApp(orderData, phoneNumber = "56984630545") {
 
 // MAIN (Producción)
 function openWhatsApp(orderData, phoneNumber = "56984630545") {
@@ -150,7 +150,7 @@ function openWhatsApp(orderData, phoneNumber = "56984630545") {
 **Patrones a cambiar:**
 
 ```
-DEVELOP: https://wa.me/56949475207
+DEVELOP: https://wa.me/56984630545
 MAIN:    https://wa.me/56984630545
 
 DEVELOP: +56984630545
@@ -165,7 +165,7 @@ MAIN:    +56 9 8463 0545
 
 ```bash
 # Buscar número de pruebas
-Get-ChildItem -Path "src" -Recurse -Include "*.vue","*.js" | Select-String -Pattern "56949475207"
+Get-ChildItem -Path "src" -Recurse -Include "*.vue","*.js" | Select-String -Pattern "56984630545"
 
 # Buscar número de producción
 Get-ChildItem -Path "src" -Recurse -Include "*.vue","*.js" | Select-String -Pattern "56984630545"
@@ -174,7 +174,7 @@ Get-ChildItem -Path "src" -Recurse -Include "*.vue","*.js" | Select-String -Patt
 ### ✅ **Validación por Ambiente**
 
 ```bash
-# En DEVELOP debe mostrar solo 56949475207
+# En DEVELOP debe mostrar solo 56984630545
 # En MAIN debe mostrar solo 56984630545
 ```
 
@@ -201,7 +201,7 @@ Get-ChildItem -Path "src" -Recurse -Include "*.vue","*.js" | Select-String -Patt
 
 ### 📱 **Números Actuales**
 
-- **Desarrollo**: +56984630545 (56949475207)
+- **Desarrollo**: +56984630545 (56984630545)
 - **Producción**: +56 9 8463 0545 (56984630545)
 
 ### 🌐 **URLs de Verificación**

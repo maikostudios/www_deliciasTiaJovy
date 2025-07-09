@@ -21,7 +21,7 @@
           </p>
           <div class="flex space-x-4">
             <a
-              href="https://wa.me/56949475207"
+              href="https://wa.me/56984630545"
               target="_blank"
               class="text-gray-300 hover:text-accent transition-colors duration-200"
             >
@@ -70,7 +70,7 @@
             </div>
             <div class="flex items-center space-x-2">
               <span>📱</span>
-              <a href="https://wa.me/56949475207" class="hover:text-accent transition-colors duration-200">
+              <a href="https://wa.me/56984630545" class="hover:text-accent transition-colors duration-200">
                 +56984630545
               </a>
             </div>

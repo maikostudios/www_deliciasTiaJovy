@@ -23,7 +23,7 @@
                 class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg">
                 📍 Visítanos en Nueva Imperial
               </button>
-              <a href="https://wa.me/56949475207" target="_blank"
+              <a href="https://wa.me/56984630545" target="_blank"
                 class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-all duration-200 rounded-lg font-semibold text-lg">
                 Contactar 📱
               </a>
@@ -263,7 +263,7 @@
           <RouterLink to="/tienda" class="btn-accent text-lg px-8 py-4">
             Hacer Pedido 🛒
           </RouterLink>
-          <a href="https://wa.me/56949475207" target="_blank"
+          <a href="https://wa.me/56984630545" target="_blank"
             class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-secondary transition-all duration-200 rounded-lg font-semibold text-lg">
             WhatsApp 📱
           </a>
@@ -349,7 +349,7 @@
                   <span class="text-primary mt-1">📱</span>
                   <div>
                     <p class="font-medium text-gray-900">Contacto</p>
-                    <a href="https://wa.me/56949475207" class="text-primary hover:text-primary/80 transition-colors">
+                    <a href="https://wa.me/56984630545" class="text-primary hover:text-primary/80 transition-colors">
                       +56984630545
                     </a>
                   </div>

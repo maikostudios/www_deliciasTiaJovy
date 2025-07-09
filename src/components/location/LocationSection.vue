@@ -69,7 +69,7 @@
                 <span class="text-primary mt-1">📱</span>
                 <div>
                   <p class="font-medium text-gray-900">Contacto</p>
-                  <a href="https://wa.me/56949475207" class="text-primary hover:text-primary/80 transition-colors">
+                  <a href="https://wa.me/56984630545" class="text-primary hover:text-primary/80 transition-colors">
                     +56984630545
                   </a>
                 </div>
@@ -147,7 +147,7 @@
               <p class="text-sm text-gray-700 text-center mb-2">
                 <span class="font-semibold">💡 Tip:</span>
                 Si tienes problemas para encontrarnos, ¡llámanos al
-                <a href="https://wa.me/56949475207" class="text-primary font-semibold hover:underline">
+                <a href="https://wa.me/56984630545" class="text-primary font-semibold hover:underline">
                   +56984630545
                 </a>
                 y te ayudamos! 😊

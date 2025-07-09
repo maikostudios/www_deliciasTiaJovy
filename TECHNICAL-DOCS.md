@@ -3,6 +3,7 @@
 ## 📦 Dependencias del Proyecto
 
 ### Dependencias de Producción
+
 ```json
 {
   "vue": "^3.4.0",
@@ -14,6 +15,7 @@
 ```
 
 ### Dependencias de Desarrollo
+
 ```json
 {
   "@vitejs/plugin-vue": "^4.5.2",
@@ -27,12 +29,14 @@
 ## 🏗️ Arquitectura del Sistema
 
 ### Patrón de Diseño
+
 - **Frontend**: MVVM (Model-View-ViewModel) con Vue 3
 - **State Management**: Flux pattern con Pinia
 - **Routing**: SPA (Single Page Application)
 - **Styling**: Utility-first con TailwindCSS
 
 ### Estructura de Stores (Pinia)
+
 ```javascript
 // stores/cart.js - Gestión del carrito
 export const useCartStore = defineStore('cart', {
@@ -56,6 +60,7 @@ export const useCartStore = defineStore('cart', {
 ## 🎨 Sistema de Diseño
 
 ### Tokens de Diseño
+
 ```css
 /* Colores */
 :root {
@@ -67,18 +72,19 @@ export const useCartStore = defineStore('cart', {
 }
 
 /* Espaciado */
---spacing-xs: 0.25rem;    /* 4px */
---spacing-sm: 0.5rem;     /* 8px */
---spacing-md: 1rem;       /* 16px */
---spacing-lg: 1.5rem;     /* 24px */
---spacing-xl: 2rem;       /* 32px */
+--spacing-xs: 0.25rem; /* 4px */
+--spacing-sm: 0.5rem; /* 8px */
+--spacing-md: 1rem; /* 16px */
+--spacing-lg: 1.5rem; /* 24px */
+--spacing-xl: 2rem; /* 32px */
 
 /* Tipografía */
---font-family-sans: 'Inter', system-ui, sans-serif;
---font-family-display: 'Poppins', system-ui, sans-serif;
+--font-family-sans: "Inter", system-ui, sans-serif;
+--font-family-display: "Poppins", system-ui, sans-serif;
 ```
 
 ### Componentes Reutilizables
+
 ```vue
 <!-- Botón Primario -->
 <button class="btn-primary">
@@ -94,13 +100,14 @@ export const useCartStore = defineStore('cart', {
 ## 🔥 Configuración Firebase
 
 ### Estructura de Firestore
+
 ```javascript
 // Colección: orders
 {
   id: "auto-generated",
   customerInfo: {
     name: "string",
-    email: "string", 
+    email: "string",
     phone: "string"
   },
   items: [
@@ -160,6 +167,7 @@ export const useCartStore = defineStore('cart', {
 ```
 
 ### Reglas de Seguridad Firestore
+
 ```javascript
 rules_version = '2';
 service cloud.firestore {
@@ -169,13 +177,13 @@ service cloud.firestore {
       allow read: if true;
       allow write: if request.auth != null;
     }
-    
+
     // Permitir escritura de pedidos a todos, lectura solo a admin
     match /orders/{document} {
       allow create: if true;
       allow read, update, delete: if request.auth != null;
     }
-    
+
     // Permitir escritura de clientes a todos, lectura solo a admin
     match /customers/{document} {
       allow create, update: if true;
@@ -188,171 +196,180 @@ service cloud.firestore {
 ## 📱 Integración WhatsApp
 
 ### Formato de Mensaje
+
 ```javascript
 const generateWhatsAppMessage = (orderData) => {
   const { customerInfo, items, total, comments } = orderData;
-  
+
   let message = `🧁 *NUEVO PEDIDO - DELICIAS TÍA JOVY* 🧁\n\n`;
   message += `👤 *Cliente:* ${customerInfo.name}\n`;
   message += `📧 *Email:* ${customerInfo.email}\n`;
   message += `📱 *Teléfono:* ${customerInfo.phone}\n\n`;
-  
+
   message += `🛒 *PRODUCTOS:*\n`;
-  items.forEach(item => {
-    message += `• ${item.name} x${item.quantity} - $${item.price * item.quantity}\n`;
+  items.forEach((item) => {
+    message += `• ${item.name} x${item.quantity} - $${
+      item.price * item.quantity
+    }\n`;
     if (item.configuration) {
-      if (item.configuration.size) message += `  📏 Tamaño: ${item.configuration.size}\n`;
-      if (item.configuration.filling) message += `  🍰 Relleno: ${item.configuration.filling}\n`;
-      if (item.configuration.extras?.length) message += `  ➕ Extras: ${item.configuration.extras.join(', ')}\n`;
+      if (item.configuration.size)
+        message += `  📏 Tamaño: ${item.configuration.size}\n`;
+      if (item.configuration.filling)
+        message += `  🍰 Relleno: ${item.configuration.filling}\n`;
+      if (item.configuration.extras?.length)
+        message += `  ➕ Extras: ${item.configuration.extras.join(", ")}\n`;
     }
   });
-  
+
   message += `\n💰 *TOTAL: $${total}*\n\n`;
-  
+
   if (comments) {
     message += `💬 *Comentarios:* ${comments}\n\n`;
   }
-  
+
   message += `📍 *RETIRO/DELIVERY:*\n`;
   message += `• Retiro en local (Nueva Imperial) - PREFERIDO\n`;
   message += `• Delivery disponible en Nueva Imperial y alrededores\n`;
   message += `• Áreas: Labranza, Temuco, Carahue, sectores rurales\n`;
   message += `• Costo delivery según distancia\n\n`;
-  
-  message += `📅 *Fecha:* ${new Date().toLocaleDateString('es-CL')}\n`;
-  message += `⏰ *Hora:* ${new Date().toLocaleTimeString('es-CL')}\n\n`;
-  
+
+  message += `📅 *Fecha:* ${new Date().toLocaleDateString("es-CL")}\n`;
+  message += `⏰ *Hora:* ${new Date().toLocaleTimeString("es-CL")}\n\n`;
+
   message += `ℹ️ *INFORMACIÓN IMPORTANTE:*\n`;
   message += `• Pago: 50% adelanto + 50% al entregar\n`;
   message += `• Adelanto no reembolsable\n`;
   message += `• Coordinar fecha de entrega\n\n`;
-  
+
   message += `¡Gracias por tu pedido! 💕`;
-  
+
   return encodeURIComponent(message);
 };
 
 // URL de WhatsApp
-const whatsappURL = `https://wa.me/56949475207?text=${message}`;
+const whatsappURL = `https://wa.me/56984630545?text=${message}`;
 ```
 
 ## 🎯 Configuración de Rutas
 
 ### Router Configuration
+
 ```javascript
-import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: () => import('@/views/HomeView.vue')
+    path: "/",
+    name: "home",
+    component: () => import("@/views/HomeView.vue"),
   },
   {
-    path: '/tienda',
-    name: 'tienda',
-    component: () => import('@/views/TiendaView.vue')
+    path: "/tienda",
+    name: "tienda",
+    component: () => import("@/views/TiendaView.vue"),
   },
   {
-    path: '/admin',
-    name: 'admin',
-    component: () => import('@/views/AdminView.vue'),
-    meta: { requiresAuth: true }
+    path: "/admin",
+    name: "admin",
+    component: () => import("@/views/AdminView.vue"),
+    meta: { requiresAuth: true },
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/LoginView.vue')
-  }
-]
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/LoginView.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
 // Guard de autenticación
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore()
-  
+  const authStore = useAuthStore();
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next('/login')
+    next("/login");
   } else {
-    next()
+    next();
   }
-})
+});
 ```
 
 ## 🔧 Configuración de Build
 
 ### Vite Configuration
+
 ```javascript
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import { resolve } from "path";
 
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
-    }
+      "@": resolve(__dirname, "src"),
+    },
   },
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
+    outDir: "dist",
+    assetsDir: "assets",
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['vue', 'vue-router', 'pinia'],
-          firebase: ['firebase/app', 'firebase/firestore', 'firebase/auth']
-        }
-      }
-    }
-  }
-})
+          vendor: ["vue", "vue-router", "pinia"],
+          firebase: ["firebase/app", "firebase/firestore", "firebase/auth"],
+        },
+      },
+    },
+  },
+});
 ```
 
 ### TailwindCSS Configuration
+
 ```javascript
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        'primary': '#e91e63',
-        'secondary': '#4a148c',
-        'accent': '#f8b88b',
+        primary: "#e91e63",
+        secondary: "#4a148c",
+        accent: "#f8b88b",
       },
       fontFamily: {
-        'sans': ['Inter', 'system-ui', 'sans-serif'],
-        'display': ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Poppins", "system-ui", "sans-serif"],
       },
       animation: {
-        'bounce-slow': 'bounce 2s infinite',
-        'pulse-slow': 'pulse 3s infinite',
-      }
+        "bounce-slow": "bounce 2s infinite",
+        "pulse-slow": "pulse 3s infinite",
+      },
     },
   },
   plugins: [],
-}
+};
 ```
 
 ## 🚨 Problemas Técnicos Conocidos
 
 ### 🔴 CRÍTICO - CartDrawer Modal Positioning
+
 **Descripción**: El modal del carrito no se posiciona correctamente
 **Síntomas**:
+
 - Modal aparece en posición fija cerca del footer
 - No se centra en la pantalla como debería
 - Overlay oscuro funciona correctamente
 - Problema presente en móvil Y desktop
 
 **Código Problemático**:
+
 ```vue
 <!-- CartDrawer.vue - Estructura actual -->
 <div
@@ -368,6 +385,7 @@ module.exports = {
 ```
 
 **Comparación con OrderModal (Funciona)**:
+
 ```vue
 <!-- OrderModal.vue - Estructura que SÍ funciona -->
 <div
@@ -378,6 +396,7 @@ module.exports = {
 ```
 
 **Posibles Causas**:
+
 - Conflicto de z-index con otros elementos
 - CSS del fondo SVG interfiriendo
 - Problema con el store de estado del carrito
@@ -386,4 +405,5 @@ module.exports = {
 **Estado**: Sin resolver - Requiere investigación profunda
 
 ---
+
 **Última actualización**: 21 de Junio, 2025 - 7:35 AM

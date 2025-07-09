@@ -57,7 +57,7 @@
               class="bg-white text-primary hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
               Ver Productos 🛒
             </button>
-            <a href="https://wa.me/56949475207" target="_blank"
+            <a href="https://wa.me/56984630545" target="_blank"
               class="border-2 border-white text-white hover:bg-white hover:text-primary font-semibold py-3 px-6 rounded-lg transition-all duration-200">
               Consultar 📱
             </a>

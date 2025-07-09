@@ -10,7 +10,7 @@ export const businessConfig = {
   contact: {
     email: "deliciastiajovy@gmail.com",
     phone: "+56984630545", // Número de pruebas para desarrollo
-    whatsapp: "56949475207", // Número de pruebas para desarrollo
+    whatsapp: "56984630545", // Número de pruebas para desarrollo
     address: "Nueva Imperial, Región de La Araucanía, Chile",
   },
 
@@ -25,7 +25,7 @@ export const businessConfig = {
   social: {
     facebook: "https://facebook.com/deliciastiajovy",
     instagram: "https://instagram.com/deliciastiajovy",
-    whatsapp: "https://wa.me/56949475207", // Número de pruebas para desarrollo
+    whatsapp: "https://wa.me/56984630545", // Número de pruebas para desarrollo
   },
 
   // Características del negocio
